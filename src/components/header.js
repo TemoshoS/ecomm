@@ -3,16 +3,20 @@ import {Link} from 'react-router-dom'
 import { auth } from '../firebase'
 
 
-export const Header = ({currentUser}) => {
+export const Header = () => {
   return (
-   <div>
 
-    
-   </div>
+   <nav className='nav-bar'>
+    <div>
+      <p>Logo</p>
+    </div>
 
+    <div>
+      <p>cart</p>
+      <p></p>
+    </div>
 
-
-
+   </nav>
     
   )
 }
