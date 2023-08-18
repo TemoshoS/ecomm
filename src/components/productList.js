@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import { Header } from './header';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import {collection, getDocs} from 'firebase/firestore'
 import { db } from '../firebase';
@@ -45,21 +45,18 @@ export const ProductList = () => {
     })
   return (
     <div className='product-list'>
-      <Header/>
-     
-      <div>
-        <Carousel showThumbs={false} autoPlay={true} interval={3000} infiniteLoop={true}>
-          <div>
-            <img src={slide1} alt='slide1' className='slide-image' />
-          </div>
-          <div>
-            <img src={slide2} alt='slide2' className='slide-image' />
-          </div>
-          <div>
-            <img src={slide3} alt='slide3' className='slide-image' />
-          </div>
-        </Carousel>
-      </div>
+
+      <Carousel showThumbs={false} autoPlay={true} interval={3000} infiniteLoop={true}>
+        <div>
+          <img src={slide1} alt='slide1' className='slide-image'/>
+        </div>
+        <div>
+          <img src={slide2} alt='slide2' className='slide-image'/>
+        </div>
+        <div>
+          <img src={slide3} alt='slide3' className='slide-image'/>
+        </div>
+      </Carousel>
 
 
             <div className='products'>
@@ -68,9 +65,9 @@ export const ProductList = () => {
                   <div onClick={() => gotoProduct(product.id)} className='product-card'>
                     <div key={product.id} >
                       <img src={product.productImage} className='product-image' />
-                      <p><b> {product.productName}</b></p>
+                      <p> {product.productName}</p>
+                      <p> {product.productPrice}</p>
                       <p> {product.productDescription}</p>
-                      <p> R {product.productPrice}</p>
                       <button onClick={(event) => addToCart(event)}>Add to Cart</button>
                     </div>
                   </div>
