@@ -8,6 +8,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import slide1 from '../images/slide1.jpg'
 import slide2 from '../images/slide2.jpg'
 import slide3 from '../images/slide3.jpg'
+import { Header } from './header';
 
 export const ProductList = () => {
 
@@ -45,6 +46,7 @@ export const ProductList = () => {
     })
   return (
     <div className='product-list'>
+      <Header/>
 
       <Carousel showThumbs={false} autoPlay={true} interval={3000} infiniteLoop={true}>
         <div>
@@ -67,7 +69,11 @@ export const ProductList = () => {
                       <img src={product.productImage} className='product-image' />
                       <p> {product.productName}</p>
                       <p> {product.productPrice}</p>
-                      <p> {product.productDescription}</p>
+                      <p className='product-description'>
+                        {product.productDescription.length > 4
+                          ? `${product.productDescription.substring(0, 30)}...`
+                          : product.productDescription}
+                      </p>
                       <button onClick={(event) => addToCart(event)}>Add to Cart</button>
                     </div>
                   </div>
