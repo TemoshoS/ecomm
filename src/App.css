@@ -47,6 +47,7 @@ height: 20vh;
 .product-card p {
   text-align: center;
   margin: 0;
+  cursor: pointer;
 }
 .product-card button {
   display: block;
