@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import { Header } from './header';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import {collection, getDocs} from 'firebase/firestore'
 import { db } from '../firebase';
@@ -8,6 +8,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import slide1 from '../images/slide1.jpg'
 import slide2 from '../images/slide2.jpg'
 import slide3 from '../images/slide3.jpg'
+import { Header } from './header';
 
 export const ProductList = () => {
 
@@ -46,20 +47,18 @@ export const ProductList = () => {
   return (
     <div className='product-list'>
       <Header/>
-     
-      <div>
-        <Carousel showThumbs={false} autoPlay={true} interval={3000} infiniteLoop={true}>
-          <div>
-            <img src={slide1} alt='slide1' className='slide-image' />
-          </div>
-          <div>
-            <img src={slide2} alt='slide2' className='slide-image' />
-          </div>
-          <div>
-            <img src={slide3} alt='slide3' className='slide-image' />
-          </div>
-        </Carousel>
-      </div>
+
+      <Carousel showThumbs={false} autoPlay={true} interval={3000} infiniteLoop={true}>
+        <div>
+          <img src={slide1} alt='slide1' className='slide-image'/>
+        </div>
+        <div>
+          <img src={slide2} alt='slide2' className='slide-image'/>
+        </div>
+        <div>
+          <img src={slide3} alt='slide3' className='slide-image'/>
+        </div>
+      </Carousel>
 
 
             <div className='products'>
@@ -68,9 +67,13 @@ export const ProductList = () => {
                   <div onClick={() => gotoProduct(product.id)} className='product-card'>
                     <div key={product.id} >
                       <img src={product.productImage} className='product-image' />
-                      <p><b> {product.productName}</b></p>
-                      <p> {product.productDescription}</p>
-                      <p> R {product.productPrice}</p>
+                      <p> {product.productName}</p>
+                      <p> {product.productPrice}</p>
+                      <p className='product-description'>
+                        {product.productDescription.length > 4
+                          ? `${product.productDescription.substring(0, 30)}...`
+                          : product.productDescription}
+                      </p>
                       <button onClick={(event) => addToCart(event)}>Add to Cart</button>
                     </div>
                   </div>
