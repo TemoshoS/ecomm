@@ -94,9 +94,10 @@ height: 20vh;
 }
 .product-card{
   background-color: beige;
-  width: 100%;
+  width: 70%;
   border-radius: 3px;
   cursor: pointer;
+  height: 50vh;
 }
 
 .product-card p {
