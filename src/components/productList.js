@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import {collection, getDocs} from 'firebase/firestore'
+import {collection, getDocs,doc,addDoc} from 'firebase/firestore'
 import { db } from '../firebase';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -14,15 +14,13 @@ export const ProductList = () => {
 
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
+    const [product, setProduct] = useState(null);
 
     const gotoProduct = (productId) =>{
         navigate(`/product/${productId}`);
     }
 
-    const addToCart = (event)=>{
-      event.stopPropagation();
-    }
-
+   
     useEffect(()=>{
         getProduct();
 
@@ -43,12 +41,31 @@ export const ProductList = () => {
         }
 
 
-    })
+    });
+
+    const addToCart = async(event, selectedProduct)=>{
+      event.stopPropagation();
+
+      try {
+        const cartItem ={
+          product: selectedProduct
+        };
+        const cartRef = await addDoc(collection(db, "cart"), cartItem);
+        alert('added to cart successfully', cartRef.id);
+        
+      } catch (error) {
+        console.log(error.message)
+        
+      }
+    }
+
+
+    
   return (
     <div className='product-list'>
       <Header/>
 
-      <Carousel showThumbs={false} autoPlay={true} interval={3000} infiniteLoop={true}>
+      <Carousel style={{width: '50%'}} showThumbs={false} autoPlay={true} interval={3000} infiniteLoop={true}>
         <div>
           <img src={slide1} alt='slide1' className='slide-image'/>
         </div>
@@ -74,7 +91,7 @@ export const ProductList = () => {
                           ? `${product.productDescription.substring(0, 30)}...`
                           : product.productDescription}
                       </p>
-                      <button onClick={(event) => addToCart(event)}>Add to Cart</button>
+                      <button onClick={(event) => addToCart(event, product)}>Add to Cart</button>
                     </div>
                   </div>
                 ))

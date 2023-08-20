@@ -8,7 +8,17 @@ const ProductDetails = () => {
     const navigate = useNavigate();
     const { productId } = useParams(); // Retrieve the itemId from the URL
     const [product, setProduct] = useState(null);
+    const [quantity, setQuantity] = useState(1);
+    
+    const increaseQuantity =()=>{
+        setQuantity(quantity + 1);
+    }
 
+    const decreaseQuantity=()=>{
+        if(quantity > 1){
+        setQuantity(quantity - 1);
+        }
+    }
 
 
     useEffect(() => {
@@ -37,6 +47,21 @@ const ProductDetails = () => {
         }
     };
 
+    const addToCart = async()=>{
+        try {
+            const cartItem = {
+                product:product,
+                quantity: quantity,
+            };
+
+            const cartRef = await addDoc(collection(db, 'cart'),cartItem);
+            alert('added to cart succesful', cartRef.id);
+            
+        } catch (error) {
+            
+        }
+    }
+
     return (
         <div className='product-details'>
             <h2>Product</h2>
@@ -45,6 +70,8 @@ const ProductDetails = () => {
             <p>{product? product.productDescription : ''}</p>
             
             <p>{product? product.productPrice : ''}</p>
+           <button onClick={decreaseQuantity}>-</button> <p>Quanity: {quantity}</p><button onClick={increaseQuantity}>+</button>
+            <button onClick={addToCart}>Add to Cart</button>
 
             <Link to='/'><button>back</button></Link>
 
