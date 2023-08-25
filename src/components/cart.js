@@ -86,7 +86,7 @@ const totalPrice = () => {
         <div  >
           {cartItems.map((item)=>(
             <div className='cart-product' key={item.id}>
-              <div className='quanity'>
+              <div className='quantity'>
 
                 <div className='cart-buttons-container'>
                 <button onClick={() => increaseQuantity(item.id)}>+</button>

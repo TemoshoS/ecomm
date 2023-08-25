@@ -47,20 +47,38 @@ const ProductDetails = () => {
         }
     };
 
-    const addToCart = async()=>{
+    const addToCart = async () => {
         try {
             const cartItem = {
-                product:product,
+                product: product,
                 quantity: quantity,
             };
-
-            const cartRef = await addDoc(collection(db, 'cart'),cartItem);
-            alert('added to cart succesful', cartRef.id);
-            
+    
+            const existingCartItem = cartItems.find(item => item.product.id === product.id);
+    
+            if (existingCartItem) {
+                const updatedCartItems = cartItems.map(item => {
+                    if (item.product.id === product.id) {
+                        return {
+                            ...item,
+                            quantity: item.quantity + quantity,
+                        };
+                    }
+                    return item;
+                });
+                setCartItems(updatedCartItems);
+                await updateCartItemQuantityInFirestore(existingCartItem.id, existingCartItem.quantity + quantity);
+            } else {
+                const cartRef = await addDoc(collection(db, 'cart'), cartItem);
+                setCartItems([...cartItems, { ...cartItem, id: cartRef.id }]);
+            }
+    
+            alert('Added to cart successfully');
         } catch (error) {
-            
+            console.error(error);
         }
-    }
+    };
+    
 
     return (
         <div className='product-details'>
