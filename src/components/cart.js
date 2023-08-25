@@ -1,6 +1,8 @@
 import React,{useEffect, useState} from 'react'
-import { collection, getDocs,doc, updateDoc } from 'firebase/firestore'
+import { collection, getDocs,doc, updateDoc,deleteDoc } from 'firebase/firestore'
 import { db } from '../firebase';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export const Cart = () => {
 
@@ -67,6 +69,17 @@ const updateCartItemQuantityInFirestore = async (itemId, quantity) => {
   });
 }
 
+const deleteCartItem = async(itemId) =>{
+  try {
+    await deleteDoc(doc(db, 'cart',itemId));
+    setCartItems((prevCartItems)=>prevCartItems.filter((item)=>item.id !== itemId))
+    
+  } catch (error) {
+    console.log(error.message)
+    
+  }
+}
+
 const productTotal =(item)=>{
   return item.product.productPrice * item.quantity;
 }
@@ -102,6 +115,7 @@ const totalPrice = () => {
               </div>
               
               <p> R {productTotal(item)}</p>
+              <button onClick={()=> deleteCartItem(item.id)}><FontAwesomeIcon icon={faTrash} /></button>
               </div>
           ))}
 

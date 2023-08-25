@@ -98,7 +98,7 @@ height: 20vh;
   width: 70%;
   border-radius: 3px;
   cursor: pointer;
-  height: 50vh;
+  height: 20vh;
 }
 
 .product-card p {
@@ -107,7 +107,7 @@ height: 20vh;
   cursor: pointer;
 }
 .product-card .product-description {
-  max-height:20px; /* Adjust the value as needed */
+  max-height:20px; 
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -147,4 +147,19 @@ height: 20vh;
 .cart-buttons-container button{
   height: 50px;
   
+}
+.cart-icon{
+  position: relative;
+  display: inline-block;
+}
+.cart-count{
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: rgb(121, 139, 113);
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  padding: 2px 5px;
+  border-radius: 50%;
 }

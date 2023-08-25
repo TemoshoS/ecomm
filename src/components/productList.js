@@ -10,56 +10,40 @@ import slide2 from '../images/slide2.jpg'
 import slide3 from '../images/slide3.jpg'
 import { Header } from './header';
 
-export const ProductList = () => {
+export const ProductList = ({addToCart}) => {
 
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
-    const [product, setProduct] = useState(null);
+    
+    const getProduct = (async()=>{
+      try {
+          const quesrySnapShot = await getDocs(collection(db, 'products'));
+          const productData = quesrySnapShot.docs.map((doc)=>({
+              id: doc.id,
+              ...doc.data()
+          }))
+          setProducts(productData);
+          
+      } catch (error) {
+          console.log(error.message)
+          
+      }
+
+
+  });
+  useEffect(()=>{
+    getProduct();
+
+},[]);
 
     const gotoProduct = (productId) =>{
         navigate(`/product/${productId}`);
     }
 
-   
-    useEffect(()=>{
-        getProduct();
-
-    },[]);
-
-    const getProduct = (async()=>{
-        try {
-            const quesrySnapShot = await getDocs(collection(db, 'products'));
-            const productData = quesrySnapShot.docs.map((doc)=>({
-                id: doc.id,
-                ...doc.data()
-            }))
-            setProducts(productData);
-            
-        } catch (error) {
-            console.log(error.message)
-            
-        }
-
-
-    });
-
-    const addToCart = async(event, selectedProduct)=>{
+    const handleAddToCart = (event, selectedProduct)=>{
       event.stopPropagation();
-
-      try {
-        const cartItem ={
-          product: selectedProduct
-        };
-        const cartRef = await addDoc(collection(db, "cart"), cartItem);
-        alert('added to cart successfully', cartRef.id);
-        
-      } catch (error) {
-        console.log(error.message)
-        
-      }
+      addToCart(selectedProduct, 1);
     }
-
-
     
   return (
     <div className='product-list'>
@@ -91,7 +75,7 @@ export const ProductList = () => {
                           ? `${product.productDescription.substring(0, 30)}...`
                           : product.productDescription}
                       </p>
-                      <button onClick={(event) => addToCart(event, product)}>Add to Cart</button>
+                      <button onClick={(event) => handleAddToCart(event, product)}>Add to Cart</button>
                     </div>
                   </div>
                 ))

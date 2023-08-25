@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate ,Link} from 'react-router-dom';
-import { doc, getDoc, addDoc, collection } from 'firebase/firestore';
+import { doc, getDoc,getDocs,updateDoc, addDoc, collection } from 'firebase/firestore';
 import { db } from '../firebase';
 
-const ProductDetails = () => {
+const ProductDetails = ({addToCart}) => {
 
-    const navigate = useNavigate();
-    const { productId } = useParams(); // Retrieve the itemId from the URL
+    
+    const { productId } = useParams(); 
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
+    
     
     const increaseQuantity =()=>{
         setQuantity(quantity + 1);
@@ -22,7 +23,7 @@ const ProductDetails = () => {
 
 
     useEffect(() => {
-
+       
         const fetchProduct = async () => {
             try {
                 // Fetch the product details using the itemId
@@ -47,20 +48,14 @@ const ProductDetails = () => {
         }
     };
 
-    const addToCart = async()=>{
-        try {
-            const cartItem = {
-                product:product,
-                quantity: quantity,
-            };
-
-            const cartRef = await addDoc(collection(db, 'cart'),cartItem);
-            alert('added to cart succesful', cartRef.id);
-            
-        } catch (error) {
-            
+     const handleAddToCart =async()=>{
+        if(product){
+            addToCart(product, quantity)
         }
-    }
+
+     }
+
+    
 
     return (
         <div className='product-details'>
@@ -71,7 +66,7 @@ const ProductDetails = () => {
             
             <p>{product? product.productPrice : ''}</p>
            <button onClick={decreaseQuantity}>-</button> <p>Quanity: {quantity}</p><button onClick={increaseQuantity}>+</button>
-            <button onClick={addToCart}>Add to Cart</button>
+            <button onClick={handleAddToCart}>Add to Cart</button>
 
             <Link to='/'><button>back</button></Link>
 
