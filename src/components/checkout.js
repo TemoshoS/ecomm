@@ -1,21 +1,17 @@
-import React from 'react'
+import React from 'react';
 
-export const Checkout = ({cartItems, total, placeOrder}) => {
+export const Checkout = ({ cartItems, totalPrice }) => {
   return (
     <div className='checkout'>
       <h2>Checkout</h2>
       <ul>
-      {cartItems.map((item) => (
-          <li key={item.id}>
-            {item.name} - ${item.price}
-          </li>
+        {cartItems.map((item) => (
+          <div key={item.id}>
+            {item.product.productName} - R{item.product.productPrice} - {item.quantity}
+          </div>
         ))}
-
       </ul>
-      <p>Total: ${total}</p>
-      <button onClick={placeOrder}>Place Order</button>
-
-
+      <p>Total Price: R {totalPrice()}</p>
     </div>
-  )
-}
+  );
+};

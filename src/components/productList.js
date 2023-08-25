@@ -1,21 +1,18 @@
 import React,{useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import {collection, getDocs,doc,addDoc} from 'firebase/firestore'
+import {collection, getDocs} from 'firebase/firestore'
 import { db } from '../firebase';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import slide1 from '../images/slide1.jpg'
-import slide2 from '../images/slide2.jpg'
-import slide3 from '../images/slide3.jpg'
-import { Header } from './header';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 export const ProductList = ({addToCart}) => {
 
     const [products, setProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
     
-    const getProduct = (async()=>{
+    const getProducts = (async()=>{
       try {
           const quesrySnapShot = await getDocs(collection(db, 'products'));
           const productData = quesrySnapShot.docs.map((doc)=>({
@@ -23,6 +20,7 @@ export const ProductList = ({addToCart}) => {
               ...doc.data()
           }))
           setProducts(productData);
+          setFilteredProducts(productData);
           
       } catch (error) {
           console.log(error.message)
@@ -32,9 +30,23 @@ export const ProductList = ({addToCart}) => {
 
   });
   useEffect(()=>{
-    getProduct();
+    getProducts();
 
 },[]);
+
+const filterProducts = () => {
+  const normalizedQuery = searchQuery.toLowerCase();
+  if (normalizedQuery === '') {
+    setFilteredProducts(products); // Return all products when search query is empty
+  } else {
+    const filtered = products.filter((product) =>
+      product.productName.toLowerCase().includes(normalizedQuery) ||
+      product.productDescription.toLowerCase().includes(normalizedQuery)
+    );
+    setFilteredProducts(filtered);
+  }
+};
+
 
     const gotoProduct = (productId) =>{
         navigate(`/product/${productId}`);
@@ -47,27 +59,24 @@ export const ProductList = ({addToCart}) => {
     
   return (
     <div className='product-list'>
-      <Header/>
-
-      <Carousel style={{width: '50%'}} showThumbs={false} autoPlay={true} interval={3000} infiniteLoop={true}>
-        <div>
-          <img src={slide1} alt='slide1' className='slide-image'/>
-        </div>
-        <div>
-          <img src={slide2} alt='slide2' className='slide-image'/>
-        </div>
-        <div>
-          <img src={slide3} alt='slide3' className='slide-image'/>
-        </div>
-      </Carousel>
-
-
+    <div className='search-bar'>
+        <input
+          type='text'
+          placeholder='Search products...'
+          value={searchQuery}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+            filterProducts();
+          }}
+        />
+      </div>
+    
             <div className='products'>
               {
-                products.map((product) => (
+                filteredProducts.map((product) => (
                   <div onClick={() => gotoProduct(product.id)} className='product-card'>
                     <div key={product.id} >
-                      <img src={product.productImage} className='product-image' />
+                      <img src={product.productImage} className='product-image' alt='Product'/>
                       <p> {product.productName}</p>
                       <p> {product.productPrice}</p>
                       <p className='product-description'>
@@ -75,7 +84,7 @@ export const ProductList = ({addToCart}) => {
                           ? `${product.productDescription.substring(0, 30)}...`
                           : product.productDescription}
                       </p>
-                      <button onClick={(event) => handleAddToCart(event, product)}>Add to Cart</button>
+                      <button onClick={(event) => handleAddToCart(event, product)}><FontAwesomeIcon icon={faCartShopping} />Add</button>
                     </div>
                   </div>
                 ))

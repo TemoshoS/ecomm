@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate ,Link} from 'react-router-dom';
-import { doc, getDoc,getDocs,updateDoc, addDoc, collection } from 'firebase/firestore';
+import { useParams, Link} from 'react-router-dom';
+import { doc, getDoc} from 'firebase/firestore';
 import { db } from '../firebase';
-
 const ProductDetails = ({addToCart}) => {
 
     
@@ -55,24 +54,34 @@ const ProductDetails = ({addToCart}) => {
 
      }
 
-    
+    const totalPrice = product ? product.productPrice * quantity : 0;
 
     return (
         <div className='product-details'>
-            <h2>Product</h2>
-            <img src={product ? product.productImage : ''} style={{width:'200px', height: '200px'}}/>
-            <h2 >{product ? product.productName : ''} </h2>
-            <p>{product? product.productDescription : ''}</p>
             
-            <p>{product? product.productPrice : ''}</p>
-           <button onClick={decreaseQuantity}>-</button> <p>Quanity: {quantity}</p><button onClick={increaseQuantity}>+</button>
-            <button onClick={handleAddToCart}>Add to Cart</button>
+            <div className='product-view-card'>
+                <div className='back-shop'>
+                    <Link to='/'><button>BACK</button></Link>
+                </div>
 
-            <Link to='/'><button>back</button></Link>
+                <img src={product ? product.productImage : ''} className='product-view-image' alt='Product'/>
 
+                <div>
+                <h2>{product ? product.productName : ''}</h2>
+                <p>{product ? product.productDescription : ''}</p>
 
+                <p>R: {totalPrice.toFixed(2)}</p>
 
+                <div className='product-quanity'>
+                    <button onClick={decreaseQuantity}>-</button>
+                    <p>{quantity}</p>
+                    <button onClick={increaseQuantity}>+</button>
+                </div>
+                <button onClick={handleAddToCart} className='add-to-cart-btn'>Add to Cart</button>
+            </div>
         </div>
+        </div>
+
     );
 };
 
