@@ -60,6 +60,19 @@
   border-bottom: 3px solid black;
 }
 
+/* home */
+.continue-shopping{
+  background-color: black;
+  color: white;
+  padding: 15px 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  margin-right: 90%;
+  margin-top: 1%;
+  cursor: pointer;
+}
+
 /* product */
 .product-list {
   text-align: center;
@@ -98,7 +111,7 @@ height: 20vh;
   width: 70%;
   border-radius: 3px;
   cursor: pointer;
-  height: 50vh;
+  height: 20vh;
 }
 
 .product-card p {
@@ -107,7 +120,7 @@ height: 20vh;
   cursor: pointer;
 }
 .product-card .product-description {
-  max-height:20px; /* Adjust the value as needed */
+  max-height:20px; 
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -127,6 +140,78 @@ height: 20vh;
   background-color: #2980b9;
 }
 
+/* Product View */
+.product-details{
+   display: 'flex';
+  flex-direction: 'column';
+  justify-content: center;
+  align-items: center;
+}
+.product-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.product-view-card {
+  width: 50%;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.back-shop{
+  margin-right: 85%;
+  padding: 20px;
+
+}
+
+.product-view-image{
+  width: 400px;
+  height: 300px;
+  border-radius: 5px;
+  
+
+}
+
+.back-shop button{
+  padding: 10px 50px;
+  border: none;
+  font-weight: bold;
+  background-color: rgb(8, 8, 8);
+  color: aliceblue;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.product-quanity{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.product-quanity button{
+  height: 30px;
+  width: 30px;
+  border: none;
+  cursor: pointer;
+
+}
+
+.product-quanity p {
+  width: 100px;
+}
+
+.add-to-cart-btn{
+  border: none;
+  margin-bottom: 100px;
+  padding: 15px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
 /* Card */
 
 .quantity{
@@ -135,7 +220,6 @@ height: 20vh;
 }
 .cart-product{
   display: flex;
-
 }
 
 .cart-buttons-container{
@@ -147,4 +231,19 @@ height: 20vh;
 .cart-buttons-container button{
   height: 50px;
   
+}
+.cart-icon{
+  position: relative;
+  display: inline-block;
+}
+.cart-count{
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: rgb(121, 139, 113);
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  padding: 2px 5px;
+  border-radius: 50%;
 }

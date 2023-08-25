@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate ,Link} from 'react-router-dom';
-import { doc, getDoc, addDoc, collection } from 'firebase/firestore';
+import { useParams, Link} from 'react-router-dom';
+import { doc, getDoc} from 'firebase/firestore';
 import { db } from '../firebase';
+const ProductDetails = ({addToCart}) => {
 
-const ProductDetails = () => {
-
-    const navigate = useNavigate();
-    const { productId } = useParams(); // Retrieve the itemId from the URL
+    
+    const { productId } = useParams(); 
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
+    
     
     const increaseQuantity =()=>{
         setQuantity(quantity + 1);
@@ -22,7 +22,7 @@ const ProductDetails = () => {
 
 
     useEffect(() => {
-
+       
         const fetchProduct = async () => {
             try {
                 // Fetch the product details using the itemId
@@ -47,55 +47,49 @@ const ProductDetails = () => {
         }
     };
 
-    const addToCart = async () => {
+    const addToCart = async()=>{
         try {
             const cartItem = {
-                product: product,
+                product:product,
                 quantity: quantity,
             };
-    
-            const existingCartItem = cartItems.find(item => item.product.id === product.id);
-    
-            if (existingCartItem) {
-                const updatedCartItems = cartItems.map(item => {
-                    if (item.product.id === product.id) {
-                        return {
-                            ...item,
-                            quantity: item.quantity + quantity,
-                        };
-                    }
-                    return item;
-                });
-                setCartItems(updatedCartItems);
-                await updateCartItemQuantityInFirestore(existingCartItem.id, existingCartItem.quantity + quantity);
-            } else {
-                const cartRef = await addDoc(collection(db, 'cart'), cartItem);
-                setCartItems([...cartItems, { ...cartItem, id: cartRef.id }]);
-            }
-    
-            alert('Added to cart successfully');
+
+            const cartRef = await addDoc(collection(db, 'cart'),cartItem);
+            alert('added to cart succesful', cartRef.id);
+            
         } catch (error) {
-            console.error(error);
+            
         }
-    };
-    
+    }
+
+    const totalPrice = product ? product.productPrice * quantity : 0;
 
     return (
         <div className='product-details'>
-            <h2>Product</h2>
-            <img src={product ? product.productImage : ''} style={{width:'200px', height: '200px'}}/>
-            <h2 >{product ? product.productName : ''} </h2>
-            <p>{product? product.productDescription : ''}</p>
             
-            <p>{product? product.productPrice : ''}</p>
-           <button onClick={decreaseQuantity}>-</button> <p>Quanity: {quantity}</p><button onClick={increaseQuantity}>+</button>
-            <button onClick={addToCart}>Add to Cart</button>
+            <div className='product-view-card'>
+                <div className='back-shop'>
+                    <Link to='/'><button>BACK</button></Link>
+                </div>
 
-            <Link to='/'><button>back</button></Link>
+                <img src={product ? product.productImage : ''} className='product-view-image' alt='Product'/>
 
+                <div>
+                <h2>{product ? product.productName : ''}</h2>
+                <p>{product ? product.productDescription : ''}</p>
 
+                <p>R: {totalPrice.toFixed(2)}</p>
 
+                <div className='product-quanity'>
+                    <button onClick={decreaseQuantity}>-</button>
+                    <p>{quantity}</p>
+                    <button onClick={increaseQuantity}>+</button>
+                </div>
+                <button onClick={handleAddToCart} className='add-to-cart-btn'>Add to Cart</button>
+            </div>
         </div>
+        </div>
+
     );
 };
 
