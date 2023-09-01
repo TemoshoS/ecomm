@@ -29,24 +29,21 @@ export const ProductList = ({addToCart}) => {
 
 
   });
-  useEffect(()=>{
-    getProducts();
-
-},[]);
+ 
 
 const filterProducts = () => {
   const normalizedQuery = searchQuery.toLowerCase();
   if (normalizedQuery === '') {
     setFilteredProducts(products); // Return all products when search query is empty
   } else {
-    const filtered = products.filter((product) =>
-      product.productName.toLowerCase().includes(normalizedQuery) ||
-      product.productDescription.toLowerCase().includes(normalizedQuery)
+    const filtered = products.filter(
+      (product) =>
+        product.productName.toLowerCase().includes(normalizedQuery) ||
+        product.productDescription.toLowerCase().includes(normalizedQuery)
     );
     setFilteredProducts(filtered);
   }
 };
-
 
     const gotoProduct = (productId) =>{
         navigate(`/product/${productId}`);
@@ -56,6 +53,11 @@ const filterProducts = () => {
       event.stopPropagation();
       addToCart(selectedProduct, 1);
     }
+
+    useEffect(()=>{
+      getProducts();
+  
+  },[]);
     
   return (
     <div className='product-list'>
@@ -73,7 +75,7 @@ const filterProducts = () => {
     
             <div className='products'>
               {
-                filteredProducts.map((product) => (
+                 filteredProducts.map((product) => (
                   <div onClick={() => gotoProduct(product.id)} className='product-card'>
                     <div key={product.id} >
                       <img src={product.productImage} className='product-image' alt='Product'/>
