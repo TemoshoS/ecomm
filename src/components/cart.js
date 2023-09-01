@@ -2,6 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { RxCross2} from 'react-icons/rx';
 
 export const Cart = ({ cartItems, increaseQuantity, decreaseQuantity, productTotal,deleteCartItem ,totalPrice}) => {
 
@@ -22,23 +23,24 @@ export const Cart = ({ cartItems, increaseQuantity, decreaseQuantity, productTot
         <div  >
           {cartItems.map((item)=>(
             <div className='cart-product' key={item.id}>
-              <div className='quanity'>
 
-                  <div className='cart-buttons-container'>
-                    <button onClick={() => increaseQuantity(item.id)}>+</button>
+             
+                <p><img src={item.product.productImage} className='cart-img' alt='Product'/></p>
+                <div>
+                  <p>{item.product.productName} </p>
+                </div>
+ <p>
+                  <div className='quanity'>
+                   <div className='cart-buttons-container'>
                     <button onClick={() => decreaseQuantity(item.id)}>-</button>
+                    <p>{item.quantity}</p>
+                    <button onClick={() => increaseQuantity(item.id)}>+</button>
                   </div>
 
                 </div>
-                <p><img src={item.product.productImage} style={{ width: '100px', height: '100px' }} alt='Product'/></p>
-
-                <div>
-                  <p>{item.product.productName} </p>
-                  <p>Quanity {item.quantity}</p>
-                </div>
-
+                </p>
                 <p> R {productTotal(item)}</p>
-                <button onClick={() => deleteCartItem(item.id)}><FontAwesomeIcon icon={faTrash} /></button>
+                <button onClick={() => deleteCartItem(item.id)} className='delete-btn'><RxCross2/></button>
               </div>
             ))}
 
