@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import {collection, getDocs} from 'firebase/firestore'
 import { db } from '../firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import {  faMagnifyingGlass,faCartShopping } from '@fortawesome/free-solid-svg-icons';
+
 
 export const ProductList = ({addToCart}) => {
 
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
-    const [searchQuery, setSearchQuery] = useState('');
+    const [search, setSearch] = useState('');
     const navigate = useNavigate();
     
     const getProducts = (async()=>{
@@ -34,18 +35,6 @@ export const ProductList = ({addToCart}) => {
 
 },[]);
 
-const filterProducts = () => {
-  const normalizedQuery = searchQuery.toLowerCase();
-  if (normalizedQuery === '') {
-    setFilteredProducts(products); // Return all products when search query is empty
-  } else {
-    const filtered = products.filter((product) =>
-      product.productName.toLowerCase().includes(normalizedQuery) ||
-      product.productDescription.toLowerCase().includes(normalizedQuery)
-    );
-    setFilteredProducts(filtered);
-  }
-};
 
 
     const gotoProduct = (productId) =>{
@@ -59,21 +48,20 @@ const filterProducts = () => {
     
   return (
     <div className='product-list'>
-    <div className='search-bar'>
-        <input
-          type='text'
-          placeholder='Search products...'
-          value={searchQuery}
-          onChange={(e) => {
-            setSearchQuery(e.target.value);
-            filterProducts();
-          }}
-        />
+
+    <div className='search-container'>
+        <input onChange={(event) => setSearch(event.target.value)} type='text' placeholder='Search for products' className='nav-input' />
+        <FontAwesomeIcon icon={faMagnifyingGlass} className='search-icon' />
       </div>
     
             <div className='products'>
-              {
-                filteredProducts.map((product) => (
+             
+            {products &&
+                                products.filter((item) => {
+
+                                    return search.toLowerCase() === '' ? item : item.productName.toLowerCase().includes(search.toLowerCase())
+
+                                }).map((product) => (
                   <div onClick={() => gotoProduct(product.id)} className='product-card'>
                     <div key={product.id} >
                       <img src={product.productImage} className='product-image' alt='Product'/>
