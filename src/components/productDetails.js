@@ -57,29 +57,27 @@ const ProductDetails = ({addToCart}) => {
 
     return (
         <div className='product-details'>
+    <div className='product-view-card'>
+        <div className='product-view-image-container'>
+            <img src={product ? product.productImage : ''} className='product-view-image' alt='Product'/>
+        </div>
+        <div className='product-info'>
             
-            <div className='product-view-card'>
-                <div className='back-shop'>
-                    <Link to='/'><button>BACK</button></Link>
-                </div>
-
-                <img src={product ? product.productImage : ''} className='product-view-image' alt='Product'/>
-
-                <div>
-                <h2>{product ? product.productName : ''}</h2>
-                <p>{product ? product.productDescription : ''}</p>
-
-                <p>R: {totalPrice.toFixed(2)}</p>
-
-                <div className='product-quanity'>
-                    <button onClick={decreaseQuantity}>-</button>
-                    <p>{quantity}</p>
-                    <button onClick={increaseQuantity}>+</button>
-                </div>
-                <button onClick={handleAddToCart} className='add-to-cart-btn'>Add to Cart</button>
+            <h2>{product ? product.productName : ''}</h2>
+            <p>{product ? product.productDescription : ''}</p>
+            <p>R: {totalPrice.toFixed(2)}</p>
+            <div>
+            <div className='product-quantity'>
+                <button onClick={decreaseQuantity}>-</button>
+                <p>{quantity}</p>
+                <button onClick={increaseQuantity}>+</button>
+                
+            </div>
+            <button onClick={handleAddToCart} className='add-to-cart-btn'>Add to Cart</button>
             </div>
         </div>
-        </div>
+    </div>
+</div>
 
     );
 };
