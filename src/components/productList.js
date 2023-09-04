@@ -3,13 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import {collection, getDocs} from 'firebase/firestore'
 import { db } from '../firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import {  faMagnifyingGlass,faCartShopping } from '@fortawesome/free-solid-svg-icons';
+
 
 export const ProductList = ({addToCart}) => {
 
     const [products, setProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
-    const [search, setSearch] = useState('');
     
     const getProducts = (async()=>{
       try {
@@ -19,7 +21,7 @@ export const ProductList = ({addToCart}) => {
               ...doc.data()
           }))
           setProducts(productData);
-          
+          setFilteredProducts(productData);
           
       } catch (error) {
           console.log(error.message)
@@ -28,8 +30,23 @@ export const ProductList = ({addToCart}) => {
 
 
   });
- 
+  useEffect(()=>{
+    getProducts();
 
+},[]);
+
+const filterProducts = () => {
+  const normalizedQuery = searchQuery.toLowerCase();
+  if (normalizedQuery === '') {
+    setFilteredProducts(products); // Return all products when search query is empty
+  } else {
+    const filtered = products.filter((product) =>
+      product.productName.toLowerCase().includes(normalizedQuery) ||
+      product.productDescription.toLowerCase().includes(normalizedQuery)
+    );
+    setFilteredProducts(filtered);
+  }
+};
 
 
     const gotoProduct = (productId) =>{
@@ -40,25 +57,18 @@ export const ProductList = ({addToCart}) => {
       event.stopPropagation();
       addToCart(selectedProduct, 1);
     }
-
-    useEffect(()=>{
-      getProducts();
-  
-  },[]);
     
   return (
     <div className='product-list'>
-    <div className='search-bar'>
-    <input onChange={(event) => setSearch(event.target.value)} className='search' placeholder='search employee' />
+
+    <div className='search-container'>
+        <input type='text' placeholder='Search for products' className='nav-input' />
+        <FontAwesomeIcon icon={faMagnifyingGlass} className='search-icon' />
       </div>
     
             <div className='products'>
-              {products &&
-                                products.filter((item) => {
-
-                                    return search.toLowerCase() === '' ? item : item.productImage.toLowerCase().includes(search.toLowerCase())
-
-                                }).map((product) => (
+              {
+                filteredProducts.map((product) => (
                   <div onClick={() => gotoProduct(product.id)} className='product-card'>
                     <div key={product.id} >
                       <img src={product.productImage} className='product-image' alt='Product'/>

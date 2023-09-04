@@ -9,6 +9,9 @@ import ProductDetails from './components/productDetails';
 import { ProductList } from './components/productList';
 import { Cart } from './components/cart';
 import { Checkout } from './components/checkout';
+import SignUp from './components/signUp';
+import Signin from './components/login';
+import ForgotPassword from './components/forgotPassword';
 
 
 function App() {
@@ -155,6 +158,9 @@ function App() {
           <Route path='/product/:productId' element={<ProductDetails addToCart={addToCart} />} />
           <Route path='/cart' element={<Cart cartItems={cartItems} updateCartItemQuantity={updateCartItemQuantity} deleteCartItem={deleteCartItem} decreaseQuantity={decreaseQuantity} increaseQuantity={increaseQuantity} productTotal={productTotal} totalPrice={totalPrice} />} />
           <Route path='/checkout' element={<Checkout cartItems={cartItems} totalPrice={totalPrice}/>} />
+          <Route path='/register' element={<SignUp/>}/>
+          <Route path='/login' element={<Signin/>}/>
+          <Route path='/forgotpassword' element={<ForgotPassword/>}/>
 
         </Routes>
       </BrowserRouter>

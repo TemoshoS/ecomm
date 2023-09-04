@@ -47,18 +47,9 @@ const ProductDetails = ({addToCart}) => {
         }
     };
 
-    const addToCart = async()=>{
-        try {
-            const cartItem = {
-                product:product,
-                quantity: quantity,
-            };
-
-            const cartRef = await addDoc(collection(db, 'cart'),cartItem);
-            alert('added to cart succesful', cartRef.id);
-            
-        } catch (error) {
-            
+    const handleAddToCart =()=>{
+        if(product){
+            addToCart(product, quantity);
         }
     }
 
