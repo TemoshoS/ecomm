@@ -10,7 +10,7 @@ export const ProductList = ({addToCart}) => {
 
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
-    const [searchQuery, setSearchQuery] = useState('');
+    const [search, setSearch] = useState('');
     const navigate = useNavigate();
     
     const getProducts = (async()=>{
@@ -35,18 +35,6 @@ export const ProductList = ({addToCart}) => {
 
 },[]);
 
-const filterProducts = () => {
-  const normalizedQuery = searchQuery.toLowerCase();
-  if (normalizedQuery === '') {
-    setFilteredProducts(products); // Return all products when search query is empty
-  } else {
-    const filtered = products.filter((product) =>
-      product.productName.toLowerCase().includes(normalizedQuery) ||
-      product.productDescription.toLowerCase().includes(normalizedQuery)
-    );
-    setFilteredProducts(filtered);
-  }
-};
 
 
     const gotoProduct = (productId) =>{
@@ -62,13 +50,18 @@ const filterProducts = () => {
     <div className='product-list'>
 
     <div className='search-container'>
-        <input type='text' placeholder='Search for products' className='nav-input' />
+        <input onChange={(event) => setSearch(event.target.value)} type='text' placeholder='Search for products' className='nav-input' />
         <FontAwesomeIcon icon={faMagnifyingGlass} className='search-icon' />
       </div>
     
             <div className='products'>
-              {
-                filteredProducts.map((product) => (
+             
+            {products &&
+                                products.filter((item) => {
+
+                                    return search.toLowerCase() === '' ? item : item.productName.toLowerCase().includes(search.toLowerCase())
+
+                                }).map((product) => (
                   <div onClick={() => gotoProduct(product.id)} className='product-card'>
                     <div key={product.id} >
                       <img src={product.productImage} className='product-image' alt='Product'/>

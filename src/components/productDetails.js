@@ -59,13 +59,10 @@ const ProductDetails = ({addToCart}) => {
         <div className='product-details'>
             
             <div className='product-view-card'>
-                <div className='back-shop'>
-                    <Link to='/'><button>BACK</button></Link>
-                </div>
-
+            
                 <img src={product ? product.productImage : ''} className='product-view-image' alt='Product'/>
 
-                <div>
+                <div className='details'>
                 <h2>{product ? product.productName : ''}</h2>
                 <p>{product ? product.productDescription : ''}</p>
 
