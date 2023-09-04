@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 export const Header = ({cartItems}) => {
    const location = useLocation();
 
-   const isCheckRoute = location.pathname === '/checkout';
+   const isCheckRoute = location.pathname === '/checkot';
 
    
 

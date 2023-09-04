@@ -47,8 +47,19 @@ const ProductDetails = ({addToCart}) => {
         }
     };
 
-    const handleAddToCart= ()=>{
-        
+    const addToCart = async()=>{
+        try {
+            const cartItem = {
+                product:product,
+                quantity: quantity,
+            };
+
+            const cartRef = await addDoc(collection(db, 'cart'),cartItem);
+            alert('added to cart succesful', cartRef.id);
+            
+        } catch (error) {
+            
+        }
     }
 
     const totalPrice = product ? product.productPrice * quantity : 0;

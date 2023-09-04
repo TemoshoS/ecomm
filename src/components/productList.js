@@ -62,13 +62,13 @@ export const ProductList = ({addToCart}) => {
                   <div onClick={() => gotoProduct(product.id)} className='product-card'>
                     <div key={product.id} >
                       <img src={product.productImage} className='product-image' alt='Product'/>
-                      <p> {product.productName}</p>
-                      <p> {product.productPrice}</p>
+                      <b> {product.productName}</b>
                       <p className='product-description'>
                         {product.productDescription.length > 4
                           ? `${product.productDescription.substring(0, 30)}...`
                           : product.productDescription}
                       </p>
+                      <p>R {product.productPrice}</p>
                       <button onClick={(event) => handleAddToCart(event, product)}><FontAwesomeIcon icon={faCartShopping} />Add</button>
                     </div>
                   </div>
