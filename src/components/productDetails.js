@@ -86,6 +86,7 @@ const ProductDetails = ({addToCart}) => {
         </div>
     </div>
 </div>
+</div>
 
     );
 };
