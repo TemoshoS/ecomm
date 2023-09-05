@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query, where } from 'firebase/firestore';
 import { db } from './firebase';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Header } from './components/header';
@@ -12,15 +12,56 @@ import { Checkout } from './components/checkout';
 import SignUp from './components/signUp';
 import Signin from './components/login';
 import ForgotPassword from './components/forgotPassword';
+import { onAuthStateChanged, signOut } from 'firebase/auth'
+import { auth } from './firebase'
+
 
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
+  const [authUser, setAuthUser] = useState(null);
+
+  useEffect(() => {
+    getCartItems();
+
+
+    // auth
+    const listen = onAuthStateChanged(auth, (user)=>{
+      if (user) {
+          setAuthUser(user);
+          
+      } else {
+          setAuthUser(null);
+          
+      }
+  })
+  return ()=>{listen();}
+  }, []);
+
+
+  const userSignOut=()=>{
+    signOut(auth).then(()=>{
+        alert('sign out successful')
+    }).catch(error=>console.log(error))
+}
+
 
   //get all products from cart
   const getCartItems = async () => {
     try {
-      const cartSnapshot = await getDocs(collection(db, 'cart'));
+      let cartSnapshot;
+    
+      if (authUser) {
+        // If the user is logged in, fetch only their cart items
+        cartSnapshot = await getDocs(
+          query(collection(db, 'cart'), where('userId', '==', authUser.uid))
+        );
+      } else {
+        // If the user is not logged in, fetch all cart items
+        cartSnapshot = await getDocs(collection(db, 'cart'));
+        
+      }
+      
       const cartData = cartSnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -50,6 +91,7 @@ function App() {
       const cartItem = {
         product: product,
         quantity: quantity,
+        userId: authUser ? authUser.uid : null,
       };
 
       // Check if the product is already in the cart
@@ -140,18 +182,14 @@ function App() {
 
 
 
-  useEffect(() => {
-    getCartItems();
-  }, []);
-
-
+ 
   return (
     <div className="App">
 
 
 
       <BrowserRouter>
-        <Header cartItems={cartItems} />
+        <Header cartItems={cartItems} authUser={authUser} userSignOut={userSignOut}/>
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/productlist' element={<ProductList addToCart={addToCart} />} />
@@ -163,6 +201,7 @@ function App() {
           <Route path='/forgotpassword' element={<ForgotPassword/>}/>
 
         </Routes>
+      
       </BrowserRouter>
 
 

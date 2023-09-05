@@ -17,7 +17,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Face6SharpIcon from '@mui/icons-material/Face6Sharp';
 
-export const Header = ({ cartItems }) => {
+export const Header = ({ cartItems, authUser, userSignOut }) => {
   const location = useLocation();
 
   const isRegisterRoute = location.pathname === '/register';
@@ -43,6 +43,7 @@ export const Header = ({ cartItems }) => {
             <span className="cart-count">{cartItems.length}</span>
           )}
       </div>,
+      to: '/cart'
     },
 
     {
@@ -58,13 +59,27 @@ export const Header = ({ cartItems }) => {
     </div>
       <div className='navbar-links-container'>
 
-        <a href='/signin'>Sign In  <FontAwesomeIcon icon={faUser} /></a>
+        {authUser ? (
+          <>
+            <a>{`${authUser.displayName}`}</a>
+            
+            <button onClick={userSignOut} style={{marginRight: '20px'}}><FontAwesomeIcon icon={faRightFromBracket}/></button>
+          </>
+        ) : (
+          <> {!isLoginRoute && (
+            <a href='/login'>
+              Sign In <FontAwesomeIcon icon={faUser} />
+            </a>
+          )}
+          </>
+        )}
+
         <a href='/cart' className="cart-icon">
           <FontAwesomeIcon icon={faCartShopping} />
           {cartItems.length > 0 && <span className="cart-count">{cartItems.length}</span>}
         </a>
 
-        <a href='/logout'><FontAwesomeIcon icon={faRightFromBracket} /></a>
+        
       </div>
 
     <div className='navbar-menu-container'>

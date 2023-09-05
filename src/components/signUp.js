@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
+import {getAuth, createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
 import {auth} from '../firebase'
 import {Link, useNavigate} from 'react-router-dom'
 import authimage from '../images/login.jpg'
@@ -8,12 +8,24 @@ export default function SignUp() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [phone, setPhoneNumber] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const naviagate = useNavigate();
 
     const register=()=>{
-      createUserWithEmailAndPassword(auth, email, password).then(()=>{
-        naviagate('/');
+      createUserWithEmailAndPassword(auth, email, password).then((userCrendential)=>{
+        
+        
+        updateProfile(userCrendential.user, {
+          displayName: name,
+          phoneNumber: phone,
+        }).then(()=>{
+          naviagate('/login');
+        }).catch((error)=>{
+          alert('Error setting display name: ' + error.message);
+        })
+        
+
       }).catch((error)=>{
         alert('Please enter atleast 7 digits')
       })
@@ -42,6 +54,12 @@ export default function SignUp() {
           <label >Email</label>
           <input onChange={(e) => setEmail(e.target.value)} type='text' />
         </div>
+
+        <div className='input-container'>
+            <label>Phone Number</label>
+            <input onChange={(e) => setPhoneNumber(e.target.value)} type='number' />
+          </div>
+
 
         <div className='input-container'>
           <label>Password</label>
