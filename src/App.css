@@ -289,81 +289,61 @@ height: 20vh;
 
 /* Product View */
 .product-details{
-   display: 'flex';
-  flex-direction: 'column';
-  justify-content: center;
-  align-items: center;
-}
-.product-details {
   display: flex;
   justify-content: center;
   align-items: center;
-  
+  padding:200px;
 }
 
 
 .product-view-card {
-  width: 50%;
+  width: 1000px;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.back-shop{
-  margin-right: 85%;
-  padding: 20px;
-
-}
-
-.product-view-image {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  border-radius: 5px;
-  
-
-.back-shop {
-  margin-right: 15px;
-  padding: 20px;
-}
-
-.back-shop button{
-  padding: 10px 50px;
-  border: none;
-  font-weight: bold;
-  background-color: rgb(8, 8, 8);
-  color: aliceblue;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.product-quantity {
   display: flex;
-  align-items: center;
+  justify-content: center;
 }
 
-.product-quantity button {
+.product-view-image{
+  width: 400px;
+  height: 300px;
+  border-radius: 5px;
+ 
+
+}
+
+.details{
+
+margin-left: 10%;
+}
+
+.product-quanity{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.product-quanity button{
   height: 30px;
   width: 30px;
   border: none;
   cursor: pointer;
-  margin-right: 10px;
+
 }
 
-.product-quantity p {
-  width: 50px;
-  text-align: center;
+.product-quanity p {
+  width: 100px;
 }
 
-.add-to-cart-btn {
+.add-to-cart-btn{
   border: none;
-  margin-top: 20px;
+  margin-bottom: 100px;
   padding: 15px 20px;
   border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
-  margin-left: 10px;
 }
-
 /* Card */
 .cart-img{
   width: 100px;

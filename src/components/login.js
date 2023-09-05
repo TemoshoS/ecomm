@@ -13,10 +13,11 @@ const Signin = () => {
 
     const login = () => {
 
-        signInWithEmailAndPassword(auth, email, password).then(() => {
-
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCrendential) => {
+             console.log(userCrendential)
            
-            naviagte('/home');
+            naviagte('/');
 
         }).catch((error) => {
             console.log(error.message);

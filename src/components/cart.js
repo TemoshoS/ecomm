@@ -1,16 +1,39 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { RxCross2} from 'react-icons/rx';
+import { auth } from '../firebase';
 
 export const Cart = ({ cartItems, increaseQuantity, decreaseQuantity, productTotal,deleteCartItem ,totalPrice}) => {
 
 
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
-  const checkOut=()=>{
-    navigate('/checkout')
+  useEffect(()=>{
+    const unsubscribe = auth.onAuthStateChanged((user)=>{
+      if(user){
+         setUser(user);
+      } else{
+        setUser(null);
+
+      }
+    })
+    return ()=> unsubscribe();
+  },[])
+
+
+
+  const checkOut= async()=>{
+    if (user) {
+      navigate('/checkout')
+    } else {
+      navigate('/login')
+      
+    }
+      
+    
+
+    
   }
  
   return (

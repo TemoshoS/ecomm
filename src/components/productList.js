@@ -9,7 +9,6 @@ import {  faMagnifyingGlass,faCartShopping } from '@fortawesome/free-solid-svg-i
 export const ProductList = ({addToCart}) => {
 
     const [products, setProducts] = useState([]);
-    const [filteredProducts, setFilteredProducts] = useState([]);
     const [search, setSearch] = useState('');
     const navigate = useNavigate();
     
@@ -21,7 +20,7 @@ export const ProductList = ({addToCart}) => {
               ...doc.data()
           }))
           setProducts(productData);
-          setFilteredProducts(productData);
+         
           
       } catch (error) {
           console.log(error.message)
@@ -56,29 +55,26 @@ export const ProductList = ({addToCart}) => {
     
             <div className='products'>
              
-            {products &&
-                                products.filter((item) => {
-
-                                    return search.toLowerCase() === '' ? item : item.productName.toLowerCase().includes(search.toLowerCase())
-
-                                }).map((product) => (
-                  <div onClick={() => gotoProduct(product.id)} className='product-card'>
-                    <div key={product.id} >
-                      <img src={product.productImage} className='product-image' alt='Product'/>
-                      <b> {product.productName}</b>
-                      <p className='product-description'>
-                        {product.productDescription.length > 4
-                          ? `${product.productDescription.substring(0, 30)}...`
-                          : product.productDescription}
-                      </p>
-                      <p>R {product.productPrice}</p>
-                      <button onClick={(event) => handleAddToCart(event, product)}><FontAwesomeIcon icon={faCartShopping} />Add</button>
-                    </div>
-                  </div>
-                ))
+        {products && products.filter((item) => {
+          return search.toLowerCase() === '' ? item : item.productName.toLowerCase().includes(search.toLowerCase())
+        }).map((product) => (
+          <div onClick={() => gotoProduct(product.id)} className='product-card'>
+            <div key={product.id} >
+              <img src={product.productImage} className='product-image' alt='Product' />
+              <b> {product.productName}</b>
+              <p className='product-description'>
+                {product.productDescription.length > 4
+                  ? `${product.productDescription.substring(0, 30)}...`
+                  : product.productDescription}
+              </p>
+              <p>R {product.productPrice}</p>
+              <button onClick={(event) => handleAddToCart(event, product)}><FontAwesomeIcon icon={faCartShopping} />Add</button>
+            </div>
+          </div>
+        ))
 
 
-              }
+        }
             </div>
           
       
