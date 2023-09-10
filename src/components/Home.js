@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const Home = ()=> {
   return (
     <div>
-          <Carousel style={{width: '50%'}} showThumbs={false} autoPlay={true} interval={3000} infiniteLoop={true}>
+          <Carousel style={{width: '100%'}} showThumbs={false} autoPlay={true} interval={3000} infiniteLoop={true}>
         <div>
           <img src={slide1} alt='slide1' className='slide-image'/>
         </div>

@@ -38,10 +38,11 @@ function App() {
   return ()=>{listen();}
   }, []);
 
-
+  
   const userSignOut=()=>{
     signOut(auth).then(()=>{
         alert('sign out successful')
+        
     }).catch(error=>console.log(error))
 }
 
@@ -53,8 +54,7 @@ function App() {
     
       if (authUser) {
         // If the user is logged in, fetch only their cart items
-        cartSnapshot = await getDocs(
-          query(collection(db, 'cart'), where('userId', '==', authUser.uid))
+        cartSnapshot = await getDocs(query(collection(db, 'cart'), where('userId', '==', authUser.uid))
         );
       } else {
         // If the user is not logged in, fetch all cart items
