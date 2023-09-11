@@ -2,7 +2,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query, where } from 'firebase/firestore';
 import { db } from './firebase';
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes ,useNavigate} from 'react-router-dom'
 import { Header } from './components/header';
 import Home from './components/Home';
 import ProductDetails from './components/productDetails';
@@ -20,7 +20,7 @@ import { auth } from './firebase'
 function App() {
   const [cartItems, setCartItems] = useState([]);
   const [authUser, setAuthUser] = useState(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     getCartItems();
 
@@ -42,6 +42,7 @@ function App() {
   const userSignOut=()=>{
     signOut(auth).then(()=>{
         alert('sign out successful')
+        navigate('/productlist')
         
     }).catch(error=>console.log(error))
 }
@@ -188,7 +189,7 @@ function App() {
 
 
 
-      <BrowserRouter>
+     
         <Header cartItems={cartItems} authUser={authUser} userSignOut={userSignOut}/>
         <Routes>
           <Route path='/' element={<Home/>}/>
@@ -202,7 +203,7 @@ function App() {
 
         </Routes>
       
-      </BrowserRouter>
+   
 
 
 
