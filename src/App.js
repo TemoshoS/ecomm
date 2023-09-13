@@ -2,7 +2,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query, where } from 'firebase/firestore';
 import { db } from './firebase';
-import { BrowserRouter, Route, Routes ,useNavigate} from 'react-router-dom'
+import { BrowserRouter, Route, Routes ,useNavigate,useLocation} from 'react-router-dom'
 import { Header } from './components/header';
 import Home from './components/Home';
 import ProductDetails from './components/productDetails';
@@ -14,6 +14,7 @@ import Signin from './components/login';
 import ForgotPassword from './components/forgotPassword';
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth } from './firebase'
+import Footer from './components/footer';
 
 
 
@@ -21,6 +22,11 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
   const [authUser, setAuthUser] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isRegisterRoute = location.pathname === '/register';
+  const isLoginRoute = location.pathname === '/login';
+
   useEffect(() => {
     getCartItems();
 
@@ -189,9 +195,12 @@ function App() {
 
 
 
-     
+       {
+        !isLoginRoute && !isRegisterRoute &&(
         <Header cartItems={cartItems} authUser={authUser} userSignOut={userSignOut}/>
-        <Routes>
+       )}
+         
+         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/productlist' element={<ProductList addToCart={addToCart} />} />
           <Route path='/product/:productId' element={<ProductDetails addToCart={addToCart} />} />
@@ -200,8 +209,12 @@ function App() {
           <Route path='/register' element={<SignUp/>}/>
           <Route path='/login' element={<Signin/>}/>
           <Route path='/forgotpassword' element={<ForgotPassword/>}/>
-
         </Routes>
+
+        {!isLoginRoute && !isRegisterRoute &&(
+          <Footer/>
+        )}
+        
       
    
 
