@@ -1,8 +1,8 @@
 import React,{useState} from 'react'
-import {getAuth, createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
+import {createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
 import {auth} from '../firebase'
 import {Link, useNavigate} from 'react-router-dom'
-import authimage from '../images/login.jpg'
+import { RxCross2} from 'react-icons/rx';
 
 export default function SignUp() {
     const [name, setName] = useState('');
@@ -34,9 +34,15 @@ export default function SignUp() {
     const togglePasswordVisibility=()=>{
       setShowPassword(!showPassword);
     }
+
+    const handleHome=()=>{
+      naviagate('/')
+    }
   return (
     <div className='auth-image'>
+      <button onClick={handleHome} className='btn-home'><RxCross2/></button>
     <div className='auth-card'>
+    
       
       <div className='auth'>
 

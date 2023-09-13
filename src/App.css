@@ -2,6 +2,10 @@
   text-align: center;
   width: 100%;
 }
+/* styles.css */
+
+
+
 
 
 .nav-bar{
@@ -97,6 +101,17 @@
   display: none;
 }
 
+.select{
+  border: none;
+  margin-right: 15px;
+  width: 14px;
+  margin-left: -15px;
+}
+.select:focus{
+  border: none;
+}
+
+
 /* Auth */
 .auth-image{
   background-image: url('./images/login.jpg');
@@ -123,6 +138,17 @@
   align-items: center;
   border-radius: 10px;
 
+}
+
+.btn-home{
+  border: none;
+  font-size: 26px;
+  color: white;
+  margin-left: 90%;
+  margin-top: 3%;
+  cursor: pointer;
+  border-radius: 10px;
+  
 }
 
 .heading {
@@ -379,6 +405,8 @@ margin-left: 10%;
 .cart-icon{
   position: relative;
   display: inline-block;
+  top: 8px;
+  
 }
 .cart-count{
   position: absolute;
@@ -398,6 +426,17 @@ margin-left: 10%;
   background-color: white;
   font-size: 23px;
   cursor: pointer;
+}
+
+.footer-container{
+  width: 100%;
+  background-color: #c1c7cc;
+  padding: 100px 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+
 }
 /* media screen */
 

@@ -3,6 +3,7 @@ import logo from '../images/mathulas.jpeg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faRightFromBracket, faUser, faBars } from '@fortawesome/free-solid-svg-icons';
 import { useLocation } from 'react-router-dom';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { HiOutlineBars3 } from 'react-icons/hi2'
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer'
@@ -61,9 +62,18 @@ export const Header = ({ cartItems, authUser, userSignOut }) => {
 
         {authUser ? (
           <>
-            <a>{`${authUser.displayName}`}</a>
-            
-            <button onClick={userSignOut} style={{marginRight: '20px'}}><FontAwesomeIcon icon={faRightFromBracket}/></button>
+           <label><a>{`Hi, ${authUser.displayName}`}</a></label> 
+             <select className='select' onChange={(event)=>{
+              if(event.target.value === 'logout'){
+                userSignOut();
+              }
+            }}>
+              <option></option>
+              <option>Profile</option>
+              <option value='logout'>Logout</option>
+            </select> 
+           
+           
           </>
         ) : (
           <> {!isLoginRoute && (
@@ -75,7 +85,7 @@ export const Header = ({ cartItems, authUser, userSignOut }) => {
         )}
 
         <a href='/cart' className="cart-icon">
-          <FontAwesomeIcon icon={faCartShopping} />
+          <AiOutlineShoppingCart style={{fontSize:'30px', color:''}}/>
           {cartItems.length > 0 && <span className="cart-count">{cartItems.length}</span>}
         </a>
 

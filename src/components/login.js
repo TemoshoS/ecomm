@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
+import { RxCross2} from 'react-icons/rx';
 
 
 const Signin = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const naviagte = useNavigate();
+    const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false)
 
     const login = () => {
@@ -17,7 +18,7 @@ const Signin = () => {
         .then((userCrendential) => {
              console.log(userCrendential)
            
-            naviagte('/');
+            navigate('/');
 
         }).catch((error) => {
             console.log(error.message);
@@ -32,9 +33,15 @@ const Signin = () => {
         setShowPassword(!showPassword);
     };
 
+    const handleHome=()=>{
+        navigate('/')
+    };
+
     return (
         <div className='auth-image'>
+            <button onClick={handleHome} className='btn-home'><RxCross2/></button>
         <div className='auth-card'>
+        
 
             
                 <p className="heading">Sign In</p>
