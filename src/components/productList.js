@@ -50,7 +50,7 @@ export const ProductList = ({ addToCart }) => {
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',
-    height: '360px',
+    height: '260px',
     width: '100%'
   }
   const slideImages = [

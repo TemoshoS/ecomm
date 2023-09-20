@@ -58,9 +58,7 @@ const ProductDetails = ({addToCart}) => {
     return (
         <div className='product-details'>
     <div className='product-view-card'>
-        <div className='product-view-image-container'>
-            <img src={product ? product.productImage : ''} className='product-view-image' alt='Product'/>
-        </div>
+       
         <div className='product-info'>
             
             <div className='product-view-card'>
