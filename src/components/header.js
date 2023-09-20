@@ -55,9 +55,13 @@ export const Header = ({ cartItems, authUser, userSignOut }) => {
   ];
   return (
     <nav className='nav-bar'>
-    <div >
+
+    <div className='header'>
+      <h3>Spares</h3>
       <a href='/'><img src={logo}  alt='No logo' className='nav-logo'/></a>
+    
     </div>
+
       <div className='navbar-links-container'>
 
         {authUser ? (

@@ -8,20 +8,8 @@ import { Link } from 'react-router-dom';
 
 const Home = ()=> {
   return (
-    <div>
-          <Carousel style={{width: '100%'}} showThumbs={false} autoPlay={true} interval={3000} infiniteLoop={true}>
-        <div>
-          <img src={slide1} alt='slide1' className='slide-image'/>
-        </div>
-        <div>
-          <img src={slide2} alt='slide2' className='slide-image'/>
-        </div>
-        <div>
-          <img src={slide3} alt='slide3' className='slide-image'/>
-        </div>
-      </Carousel>
-      <Link to='/productlist' ><button className='continue-shopping'>Continue Shopping...</button></Link>
-    </div>
+   <>
+   </>
 
     
   )
