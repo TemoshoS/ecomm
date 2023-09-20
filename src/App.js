@@ -201,8 +201,8 @@ function App() {
        )}
          
          <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/productlist' element={<ProductList addToCart={addToCart} />} />
+          <Route path='/home' element={<Home/>}/>
+          <Route path='/' element={<ProductList addToCart={addToCart} />} />
           <Route path='/product/:productId' element={<ProductDetails addToCart={addToCart} />} />
           <Route path='/cart' element={<Cart cartItems={cartItems} updateCartItemQuantity={updateCartItemQuantity} deleteCartItem={deleteCartItem} decreaseQuantity={decreaseQuantity} increaseQuantity={increaseQuantity} productTotal={productTotal} totalPrice={totalPrice} />} />
           <Route path='/checkout' element={<Checkout cartItems={cartItems} totalPrice={totalPrice}/>} />
