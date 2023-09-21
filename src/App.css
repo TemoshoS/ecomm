@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  width: 100%;
+ 
 }
 /* styles.css */
 
@@ -16,7 +16,7 @@
   align-items: center;
   padding: 5px;
   height: 60px;
-  width: 100%;
+  
   border-bottom: 1px solid rgb(179, 187, 189);
   margin-bottom: 40px;
   
