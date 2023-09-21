@@ -148,7 +148,11 @@ export const ProductList = ({ addToCart }) => {
                       : product.productDescription}
                   </p>
 
-                  <p>R {product.productPrice}</p>
+                  <div className="price-container">
+                    <p className="product-price">R{product.productPrice}.00</p>
+                    <div className="line"></div>
+                  </div>
+
                   <button onClick={(event) => handleAddToCart(event, product)}>
                     <FontAwesomeIcon icon={faCartShopping} /> Add
                   </button>
