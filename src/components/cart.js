@@ -35,14 +35,16 @@ export const Cart = ({
 
   return (
     <div className='cart'>
-      <h2>My cart - {cartItems.length} items</h2>
-      {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
-        <div className='cart-content'>
-          <div className='products-list'>
-            {cartItems.map((item) => (
-              <div className='cart-product' key={item.id}>
+    <h2>My cart - {cartItems.length} items</h2>
+    {cartItems.length === 0 ? (
+      <p>Your cart is empty.</p>
+    ) : (
+      <div className='cart-content'>
+        <div className='products-list'>
+          {cartItems.map((item) => (
+            <div key={item.id}>
+              <div className='cart-product'>
+                {/* Product content here */}
                 <img src={item.product.productImage} className='cart-img' alt='Product' />
                 <div>
                   <p>{item.product.productName}</p>
@@ -59,16 +61,18 @@ export const Cart = ({
                   <RxCross2 />
                 </button>
               </div>
-            ))}
-          </div>
-
-          <div className='cart-summary'>
-            <p>Total Price: R {totalPrice()}</p>
-            <button onClick={checkOut}>Checkout</button>
-          </div>
+              <div className='cart-line'></div> {/* Add this line after each product */}
+            </div>
+          ))}
         </div>
-        
-      )}
-    </div>
+  
+        <div className='cart-summary'>
+          <p>Total Price: R {totalPrice()}</p>
+          <button onClick={checkOut}>Checkout</button>
+        </div>
+      </div>
+    )}
+  </div>
+  
   );
 };
