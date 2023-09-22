@@ -4,7 +4,6 @@ import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query, where } 
 import { db } from './firebase';
 import { BrowserRouter, Route, Routes ,useNavigate,useLocation} from 'react-router-dom'
 import { Header } from './components/header';
-import Home from './components/Home';
 import ProductDetails from './components/productDetails';
 import { ProductList } from './components/productList';
 import { Cart } from './components/cart';
@@ -48,7 +47,7 @@ function App() {
   const userSignOut=()=>{
     signOut(auth).then(()=>{
         alert('sign out successful')
-        navigate('/productlist')
+        navigate('/')
         
     }).catch(error=>console.log(error))
 }
@@ -201,7 +200,7 @@ function App() {
        )}
          
          <Routes>
-          <Route path='/home' element={<Home/>}/>
+         
           <Route path='/' element={<ProductList addToCart={addToCart} />} />
           <Route path='/product/:productId' element={<ProductDetails addToCart={addToCart} />} />
           <Route path='/cart' element={<Cart cartItems={cartItems} updateCartItemQuantity={updateCartItemQuantity} deleteCartItem={deleteCartItem} decreaseQuantity={decreaseQuantity} increaseQuantity={increaseQuantity} productTotal={productTotal} totalPrice={totalPrice} />} />

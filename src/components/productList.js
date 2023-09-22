@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection,getDocs,query,where,orderBy} from 'firebase/firestore';
 import { db } from '../firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faCartShopping } from '@fortawesome/free-solid-svg-icons';
@@ -11,12 +11,18 @@ import 'react-slideshow-image/dist/styles.css'
 export const ProductList = ({ addToCart }) => {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState(''); // Add state for selected category
+  const [selectedCategory, setSelectedCategory] = useState('');
   const navigate = useNavigate();
 
   const getProducts = async () => {
     try {
-      const querySnapshot = await getDocs(collection(db, 'products'));
+
+      const q = query(
+        collection(db, 'products'),
+        orderBy('productName') 
+      );
+  
+      const querySnapshot = await getDocs(q);
       const productData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),

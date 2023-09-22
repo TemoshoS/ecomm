@@ -1,6 +1,5 @@
 .App {
   text-align: center;
- 
 }
 /* styles.css */
 
@@ -16,8 +15,7 @@
   align-items: center;
   padding: 5px;
   height: 60px;
-  
-  border-bottom: 1px solid rgb(179, 187, 189);
+  border-bottom: 0.1px solid rgb(179, 187, 189);
   margin-bottom: 40px;
   
   
@@ -274,7 +272,7 @@
   width: 30%;
   height: 1.3vh;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 20px;
   margin-right: 20%;
   border: 1px solid #ccc; 
   font-family: 'Courier New', Courier, monospace;
@@ -381,7 +379,7 @@
 }
 
 
-button {
+.product-card button {
   margin-top: 10px;
   background-color: white;
   color: #ccc;
@@ -392,8 +390,9 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #282829;
+.product-card button:hover {
+  background-color: #ccc;
+  color: white;
 }
 
 /* Product View */
@@ -401,59 +400,122 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding:200px;
-}
+  margin-bottom: 100px;
 
+}
 
 .product-view-card {
-  width: 1000px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: center;
-}
-
-.product-view-image{
-  width: 400px;
-  height: 300px;
-  border-radius: 5px;
- 
-
-}
-
-.details{
-
-margin-left: 10%;
-}
-
-.product-quanity{
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  padding: 100px;
+  max-width: 800px;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
-.product-quanity button{
-  height: 30px;
-  width: 30px;
-  border: none;
-  cursor: pointer;
-
+/* Styles for the product image */
+.product-view-image {
+  max-width: 50%;
+  height: auto;
+ 
+  
 }
 
-.product-quanity p {
-  width: 100px;
+.product-desc{
+  
+  font-size: 16px;
+  width: 500px;
+  color: #ccc;
+}
+.product-details-content {
+  flex: 1;
+  text-align: left;
+  margin-left: 50px;
+ 
+  
 }
 
-.add-to-cart-btn{
-  border: none;
-  margin-bottom: 100px;
-  padding: 15px 20px;
-  border-radius: 10px;
+
+/* Styles for the product name */
+.product-details-content h2 {
+  font-size: 2em;
+  margin: 0;
+}
+
+
+
+/* Styles for the price */
+.product-details-content .price {
+  font-size: 18px;
   font-weight: bold;
-  cursor: pointer;
+  margin-top: 10px;
+  color: #98bdce;
 }
+
+/* Styles for the quantity control */
+.product-quanity {
+  display: flex;
+  
+  align-items: center;
+  margin-top: 20px;
+}
+
+.product-quanity button {
+  background-color: white;
+  color: #ccc;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 3px 10px;
+  margin: 0 10px;
+}
+.product-quanity button:hover {
+  background-color: black;
+  color: #ccc;
+  border: none;
+  
+}
+
+/* Style for the "Add to Cart" button */
+.add-to-cart-btn {
+  background-color: white;
+  color: #ccc;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 6px 30px;
+  margin-top: 20px;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #ccc;
+  color: white;
+
+}
+
+/* Styles for the "BACK" button */
+.back-shop button {
+  background-color: #ccc;
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px 10px;
+  text-decoration: none;
+}
+
+.back-shop button:hover {
+  background-color: #aaa;
+}
+
 /* Card */
+
 .cart-img{
   width: 100px;
   height: 100px;

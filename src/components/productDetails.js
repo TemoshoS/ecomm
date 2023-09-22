@@ -57,34 +57,29 @@ const ProductDetails = ({addToCart}) => {
 
     return (
         <div className='product-details'>
-    <div className='product-view-card'>
-       
-        <div className='product-info'>
-            
             <div className='product-view-card'>
-                <div className='back-shop'>
-                    <Link to='/'><button>BACK</button></Link>
+                
+
+                <img src={product ? product.productImage : ''} className='product-view-image' alt='Product' />
+
+                <div className='product-details-content'>
+                    <h2>{product ? product.productName : ''}</h2>
+                    <p className='price'>R{totalPrice.toFixed(2)}</p>
+                    <p className='product-desc'>{product ? product.productDescription : ''}</p>
+
+                    
+
+                    <div className='product-quanity'> <b>Quantity:</b>
+                        <button onClick={decreaseQuantity}>-</button>
+                        <p>{quantity}</p>
+                        <button onClick={increaseQuantity}>+</button>
+                    </div>
+                    <button onClick={handleAddToCart} className='add-to-cart-btn'>Add to Cart</button>
                 </div>
-
-                <img src={product ? product.productImage : ''} className='product-view-image' alt='Product'/>
-
-                <div>
-                <h2>{product ? product.productName : ''}</h2>
-                <p>{product ? product.productDescription : ''}</p>
-
-                <p>R: {totalPrice.toFixed(2)}</p>
-
-                <div className='product-quanity'>
-                    <button onClick={decreaseQuantity}>-</button>
-                    <p>{quantity}</p>
-                    <button onClick={increaseQuantity}>+</button>
-                </div>
-                <button onClick={handleAddToCart} className='add-to-cart-btn'>Add to Cart</button>
             </div>
         </div>
-    </div>
-</div>
-</div>
+
+
 
     );
 };
