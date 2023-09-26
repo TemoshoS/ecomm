@@ -67,6 +67,7 @@ export const Cart = ({
         </div>
   
         <div className='cart-summary'>
+          <h3>Cart Summary</h3>
           <p>Total Price: R {totalPrice()}</p>
           <button onClick={checkOut}>Checkout</button>
         </div>

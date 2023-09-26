@@ -499,21 +499,6 @@
 
 }
 
-/* Styles for the "BACK" button */
-.back-shop button {
-  background-color: #ccc;
-  color: #333;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  padding: 5px 10px;
-  text-decoration: none;
-}
-
-.back-shop button:hover {
-  background-color: #aaa;
-}
 
 /* Card */
 .cart{
@@ -594,6 +579,8 @@
   border: 1px solid #ccc;
   width: 200px;
   height: 200px;
+  padding: 10px;
+  text-align: left;
 }
 /* Footer */
 

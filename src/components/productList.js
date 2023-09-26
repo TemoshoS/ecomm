@@ -87,7 +87,7 @@ export const ProductList = ({ addToCart }) => {
             onChange={(event) => setSelectedCategory(event.target.value)}
             className='select-category'
           >
-            <option value="">All Categories</option>
+            <option value="">Shop by Department</option>
             <option value="body">Boby Parts</option>
             <option value="engine">Engine</option>
             <option value="interior">Interior</option>
