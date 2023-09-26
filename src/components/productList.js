@@ -76,7 +76,7 @@ export const ProductList = ({ addToCart }) => {
 
 
   return (
-    <div>
+    <div className='product-list-container'>
 
       <div className='filter-container'>
 

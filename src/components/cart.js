@@ -47,12 +47,12 @@ export const Cart = ({
                 {/* Product content here */}
                 <img src={item.product.productImage} className='cart-img' alt='Product' />
                 <div>
-                  <p>{item.product.productName}</p>
+                  <p className='product-cart-name'>{item.product.productName}</p>
                 </div>
                 <div className='quantity'>
                   <div className='cart-buttons-container'>
                     <button onClick={() => decreaseQuantity(item.id)}>-</button>
-                    <p>{item.quantity}</p>
+                    <p className='cart-quantity'>{item.quantity}</p>
                     <button onClick={() => increaseQuantity(item.id)}>+</button>
                   </div>
                 </div>
@@ -61,14 +61,15 @@ export const Cart = ({
                   <RxCross2 />
                 </button>
               </div>
-              <div className='cart-line'></div> {/* Add this line after each product */}
+              <div className='cart-line'></div> 
             </div>
           ))}
         </div>
   
         <div className='cart-summary'>
-          <p>Total Price: R {totalPrice()}</p>
-          <button onClick={checkOut}>Checkout</button>
+          <b className='summary'>Cart Summary</b>
+          <p className='cart-tot-price'> Total Price: <span className='cart-price'>R{totalPrice()}</span></p>
+          <button onClick={checkOut} className='checkout'>Checkout</button>
         </div>
       </div>
     )}
