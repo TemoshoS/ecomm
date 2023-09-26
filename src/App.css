@@ -401,6 +401,7 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 100px;
+  height: auto;
 
 }
 
@@ -502,7 +503,8 @@
 
 /* Card */
 .cart{
-  height: 100vh;
+  height: auto;
+  width: 100%;
 }
 .cart-content{
   display:flex;
@@ -510,25 +512,19 @@
  
 }
 .cart-img{
-  width: 100px;
-  height: 100px;
+  width:150px;
+  height: 150px;
+  margin-right: 20px;
 }
-.quantity{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.cart-product{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
+.product-cart-name{
+  font-weight: bold;
+  font-size: 19px;
+  margin-right: 10px;
+  width: 150px;
+  color: #a1bfdf;
   
 }
 
-.cart-product p{
-  margin-left: 40px;
-}
 .cart-buttons-container{
   display: flex;
   flex-direction: row;
@@ -536,10 +532,40 @@
 }
 
 .cart-buttons-container button{
-  height: 50px;
-  border: none;
+  background-color: white;
+  color: #ccc;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
+  height: 30px;
+  margin-top: 10px;
+  
 }
+.cart-buttons-container button:hover {
+  background-color: black;
+  color: #ccc;
+  border: none;
+  
+}
+.cart-quantity{
+  margin-right: 30px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: bold;
+  
+}
+.cart-product{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  
+}
+
+.cart-product p{
+  margin-left: 40px;
+}
+
 .cart-icon{
   position: relative;
   display: inline-block;
@@ -571,7 +597,7 @@
   width: 100%;
   margin-top: 20px;
   margin-bottom: 20px;
-  margin-left: -100px;
+  
 }
 
 .cart-summary{
@@ -581,19 +607,51 @@
   height: 200px;
   padding: 10px;
   text-align: left;
+  border: 0.1px solid #ccc;
+  width: 12%;
+  height: 20vh;
+  text-align: left;
+  padding: 10px;
+  margin-right: -100px;
+  margin-left: 100px;
+}
+
+.summary{
+       color: #787a7a;
+}
+
+.cart-price{
+  margin-left: 24px;
+  color: rgb(41, 129, 41);
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.checkout{
+  width: 100%;
+  height: 3.5vh;
+  border: none;
+  color: white;
+  font-weight: bold;
+  background-color: rgb(41, 129, 41);
+  margin-top: 20px;
+  border-radius: 2px;
+  font-size: 1rem;
 }
 /* Footer */
 
 .footer-container{
   width: 100%;
-  background-color: #c1c7cc;
+  background-color: #ccc;
   padding: 100px 0;
   bottom: 0;
   left: 0;
   right: 0;
   text-align: center;
+  
 
 }
+
 /* media screen */
 
 @media screen and (max-width: 800px){
