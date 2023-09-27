@@ -5,25 +5,39 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 const ForgotPassword = () => {
 
     const [email, setEmail] = useState('');
+    const [message, setMessage]  = useState('');
 
-    const ResetPasword=()=>{
-   sendPasswordResetEmail(auth, email).then(()=>{
-    alert('Check your email')
-   }).catch((error)=>{
+    const ResetPasword = () => {
+        sendPasswordResetEmail(auth, email).then(() => {
+            setMessage('Password reset email sent. Check your email.');
+        }).catch((error) => {
 
-   })
+            if (error.code === 'auth/user-not-found') {
+                setMessage('User with this email does not exist.');
+            } else {
+                setMessage('An error occurred. Please try again later.');
+            }
+
+        })
 
     };
 
     return (
-        <div className='App'>
+        <div className='auth'>
+        <div className='auth-card'>
 
-            <h1>Reset password</h1>
+            <h3 style={{color:'#ccc'}}>Reset your password</h3>
 
-            <input type='text' placeholder='Enter email' onChange={(e) => setEmail(e.target.value)} /><br />
+            <div className='input-container'>
+                <input type='text' placeholder='Enter email' onChange={(e) => setEmail(e.target.value)} />
+                {message && <p style={{ color: 'red' }}>{message}</p>} {/* Display the message */}
+            </div>
+
             <button className='submit-button' onClick={ResetPasword}>Reset passoword</button>
 
         </div>
+</div>
+    
     )
 }
 

@@ -25,6 +25,7 @@ function App() {
 
   const isRegisterRoute = location.pathname === '/register';
   const isLoginRoute = location.pathname === '/login';
+  const isForgortPasword = location.pathname === '/forgotpassword';
 
   useEffect(() => {
     getCartItems();
@@ -195,7 +196,7 @@ function App() {
 
 
        {
-        !isLoginRoute && !isRegisterRoute &&(
+        !isLoginRoute && !isRegisterRoute && !isForgortPasword &&(
         <Header cartItems={cartItems} authUser={authUser} userSignOut={userSignOut}/>
        )}
          
@@ -210,7 +211,7 @@ function App() {
           <Route path='/forgotpassword' element={<ForgotPassword/>}/>
         </Routes>
 
-        {!isLoginRoute && !isRegisterRoute &&(
+        {!isLoginRoute && !isRegisterRoute && !isForgortPasword &&(
           <Footer/>
         )}
         

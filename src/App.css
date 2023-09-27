@@ -90,11 +90,12 @@
 
 
 /* Auth */
-.auth-image{
-  background-image: url('./images/login.jpg');
-  background-size: cover;
+.auth{
+  background:linear-gradient(217deg, rgba(238, 109, 109, 0.8), rgba(255,0,0,0) 70.71%),
+             linear-gradient(127deg, rgba(174, 231, 174, 0.8), rgba(0,255,0,0) 70.71%),
+             linear-gradient(336deg, rgba(60, 60, 238, 0.8), rgba(0,0,255,0) 70.71%);
   width: 100%;
-  height: fit-content;
+  
   position: absolute;
   top: 0;
   left: 0;
@@ -103,29 +104,39 @@
   align-items: center;
 }
 
-
 .auth-card {
 
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   background-color: white;
-  height: 10vh;
+  height: 40rem;
   width: 20%;
   margin: 10vh auto;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
+
+  
+  border-radius: 5px;
 
 }
 
 .btn-home{
   border: none;
+  width: 40px;
+  height: 40px;
   font-size: 26px;
-  color: white;
+  color: #ccc;
+  background-color: azure;
   margin-left: 90%;
   margin-top: 3%;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
+}
+.btn-home:hover
+{
+  background-color: #ccc;
+  color: white;
 }
 
 .heading {
@@ -137,28 +148,41 @@
 
 .input-container {
   position: relative;
+  
 }
 
 
 .input-container input {
-  border: 1px solid gray;
-  border-radius: 2px;
+  border: none;
+  border-bottom: 1px solid #ccc;
   position: relative;
   width: 70%;
   margin-top: 10px;
   margin-bottom: 10px;
   height: 3vh;
   padding: 0px 10px;
+  outline: none; 
+  background-color: rgba(255, 255, 255, 0.7);
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: #ccc;
+  font-size: 18px;
+ 
+}
+.input-container input:focus {
+  border: none;
+  border-bottom: 1px solid #bd9191;
+  
+ 
 }
 
 .input-container label {
   font-weight: normal;
-  font-size: 10px;
+  font-size: 12px;
   position: absolute;
   z-index: 1;
-  left: 6em;
-  background-color: white;
-  padding: 0 5px;
+  left: 5em;
+  padding: -8px 10px;
+  color: #ccc;
 }
 
 
@@ -175,13 +199,6 @@
   cursor: pointer;
 }
 
-.fa-eye:before {
-  content: '\f06e';
-}
-
-.fa-eye-slash:before {
-  content: '\f070';
-}
 
 .input-container .rememberme {
 
@@ -192,16 +209,19 @@
 
 
 .submit-button {
-  margin-top: 30px;
-  width: 20%;
-  height: 3vh;
-  margin-bottom: 20px;
-  background-color: rgb(247, 199, 128);
-  border: none;
-  color: white;
-  border-radius: 5px;
-  font-weight: bold;
+  margin-top: 50px;
+  background-color: white;
+  color: #ccc;
+  border: 1px solid #ccc;
+  padding: 7px;
+  width: 200px;
+  border-radius: 15px;
   cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #ccc;
+  color: white;
 }
 
 .login-link {
