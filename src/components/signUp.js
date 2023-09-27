@@ -3,6 +3,7 @@ import {createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
 import {auth} from '../firebase'
 import {Link, useNavigate} from 'react-router-dom'
 import { RxCross2} from 'react-icons/rx';
+import { BiSolidUserCircle } from 'react-icons/bi';
 
 export default function SignUp() {
     const [name, setName] = useState('');
@@ -39,14 +40,14 @@ export default function SignUp() {
       naviagate('/')
     }
   return (
-    <div className='auth-image'>
+    <div className='auth'>
       <button onClick={handleHome} className='btn-home'><RxCross2/></button>
     <div className='auth-card'>
     
       
-      <div className='auth'>
+      <div >
 
-        <p className="heading">Sign up</p>
+        <p className="heading"><BiSolidUserCircle/></p>
         <p>Register to access your account</p>
 
 
