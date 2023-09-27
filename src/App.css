@@ -94,7 +94,7 @@
   background-image: url('./images/login.jpg');
   background-size: cover;
   width: 100%;
-  
+  height: fit-content;
   position: absolute;
   top: 0;
   left: 0;
@@ -108,7 +108,7 @@
 
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   background-color: white;
-  height: 40rem;
+  height: 10vh;
   width: 20%;
   margin: 10vh auto;
   justify-content: center;
@@ -224,9 +224,9 @@
 
 .select-category {
   appearance: none; 
-  padding: 10px; 
+  padding: 5px; 
   font-size: 14px; 
-  color: #ccc;
+  color: black;
   border: 1px solid #ccc; 
   border-radius: 4px; 
   cursor: pointer;
@@ -595,25 +595,21 @@
   flex-grow: 1; 
   border-bottom: 1px solid #ccc;
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   
 }
 
 .cart-summary{
   
-  border: 1px solid #ccc;
-  width: 200px;
-  height: 200px;
-  padding: 10px;
-  text-align: left;
+
   border: 0.1px solid #ccc;
-  width: 12%;
+  width: 15%;
   height: 20vh;
   text-align: left;
   padding: 10px;
-  margin-right: -100px;
-  margin-left: 100px;
+  margin-right: -130px;
+  margin-left: 130px;
 }
 
 .summary{
@@ -621,10 +617,10 @@
 }
 
 .cart-price{
-  margin-left: 24px;
+  margin-left: 20px;
   color: rgb(41, 129, 41);
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .checkout{

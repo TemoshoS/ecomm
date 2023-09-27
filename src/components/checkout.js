@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Checkout = ({ cartItems, totalPrice }) => {
   return (
-    <div className='checkout'>
+    <div className='c'>
       <h2>Checkout</h2>
       <ul>
         {cartItems.map((item) => (
