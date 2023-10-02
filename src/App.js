@@ -187,6 +187,28 @@ function App() {
     }
   };
 
+ // Define the function to delete all cart items
+const deleteAllCartItems = async () => {
+  try {
+    if (cartItems.length === 0) {
+      alert('Cart is already empty.');
+      return;
+    }
+
+    // Loop through all cart items and delete them one by one
+    for (const cartItem of cartItems) {
+      await deleteDoc(doc(db, 'cart', cartItem.id));
+    }
+
+    // Clear the cart items from the state
+    setCartItems([]);
+
+  } catch (error) {
+   
+  }
+};
+
+
 
 
  
@@ -205,7 +227,7 @@ function App() {
           <Route path='/' element={<ProductList addToCart={addToCart} />} />
           <Route path='/product/:productId' element={<ProductDetails addToCart={addToCart} />} />
           <Route path='/cart' element={<Cart cartItems={cartItems} updateCartItemQuantity={updateCartItemQuantity} deleteCartItem={deleteCartItem} decreaseQuantity={decreaseQuantity} increaseQuantity={increaseQuantity} productTotal={productTotal} totalPrice={totalPrice} />} />
-          <Route path='/checkout' element={<Checkout cartItems={cartItems} totalPrice={totalPrice}/>} />
+          <Route path='/checkout' element={<Checkout cartItems={cartItems} totalPrice={totalPrice} deleteAllCartItems={deleteAllCartItems}/>} />
           <Route path='/register' element={<SignUp/>}/>
           <Route path='/login' element={<Signin/>}/>
           <Route path='/forgotpassword' element={<ForgotPassword/>}/>

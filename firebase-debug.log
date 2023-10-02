@@ -1,0 +1,31 @@
+[debug] [2023-10-02T09:41:59.443Z] ----------------------------------------------------------------------
+[debug] [2023-10-02T09:41:59.448Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\eKasi_TMB_COM00704\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init functions
+[debug] [2023-10-02T09:41:59.448Z] CLI Version:   11.8.0
+[debug] [2023-10-02T09:41:59.448Z] Platform:      win32
+[debug] [2023-10-02T09:41:59.448Z] Node Version:  v14.18.1
+[debug] [2023-10-02T09:41:59.656Z] Time:          Mon Oct 02 2023 11:41:59 GMT+0200 (South Africa Standard Time)
+[debug] [2023-10-02T09:41:59.656Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-10-02T09:41:59.736Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2023-10-02T09:41:59.778Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-10-02T09:41:59.778Z] > authorizing via signed-in user (hamiltontebo@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\eKasi_TMB_COM00704\Desktop\spares\spares
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2023-10-02T09:42:00.611Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2023-10-02T09:42:00.612Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
