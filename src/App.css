@@ -523,6 +523,7 @@
 .cart{
   height: 100vh;
   width: 100%;
+  padding: 10px;
 }
 
 .continue-button{
@@ -535,6 +536,7 @@
 .cart-content{
   display:flex;
   justify-content: center;
+  padding: 10px;
  
 }
 .cart-img{
@@ -662,10 +664,17 @@
 }
 
 /* Address */
+
+.billing {
+  display:flex;
+  justify-content: center;
+ 
+}
 .address {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-right: 200px;
 }
 
 
@@ -674,7 +683,7 @@
   flex-direction: column;
   margin-top: 10px;
   margin-bottom: 10px;
-  width: 20%;
+  width: 100%;
 }
 
 .address-container label {
@@ -704,6 +713,31 @@
 }
 
 /* aaa */
+
+
+.checkout-cart {
+  margin-left: 60px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+  text-align: left;
+}
+
+.checkout-cart h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.checkout-cart .Items {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.checkout-cart p {
+  font-size: 16px;
+  font-weight: bold;
+}
 
 
 

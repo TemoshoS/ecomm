@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { db } from '../firebase';
 import {  addDoc,collection } from 'firebase/firestore';
+import PaystackPop from '@paystack/inline-js'
 
 
 export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
@@ -12,13 +13,33 @@ export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
   const [province, setProvince] = useState('');
   const [postcode, setPostcode] = useState('');
 
+
+  const paywithpaystack =(e)=>{
+    e.preventDefault();
+
+    const paystack = new PaystackPop();
+    const calculatedAmount = totalPrice();
+
+    paystack.newTransaction({
+      key:"pk_test_1614fb1b435881450bf82e4c90488b8143bed936",
+      amount: calculatedAmount * 100,
+      email,
+      name,
+      onSuccess(transaction){
+        let message = `Payment Complete! Reference ${transaction.reference}`
+        alert(message);
+        // After successful payment, call handleConfirm to save the order data
+      handleConfirm();
+      },
+      onCancel(){
+        alert('you have canceled the transaction')
+      }
+    })
+  }
+
   const handleConfirm = async()=>{
 
-    const isConfirmed = window.confirm('Are you sure you want to confirm the order?')
-    if(!isConfirmed){
-      return;
-    }
-
+  
     const ordersCollectionRef = collection(db, 'orders');
 
       const orderData = {
@@ -39,7 +60,7 @@ export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
     try {
       const docRef = await addDoc(ordersCollectionRef, orderData);
      
-      alert('Order saved with ID: ' + docRef.id);
+    
 
     deleteAllCartItems();
     setName('');
@@ -57,14 +78,17 @@ export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
   }
 
   return (
-    <div className='bili'>
+    <div>
+    <div className='billing'>
 
       
       
       {/* Address */}
       <div className='address'>
       <h2>Billing Address</h2>
-      <div className="address-container">
+     
+
+        <div className="address-container">
           <label htmlFor="name">Name</label>
           <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
         </div>
@@ -104,20 +128,23 @@ export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
       
       {/* Product Items */}
       <div>
-      <ul className="product-list">
+      
+      <div className='checkout-cart'>
+        <h2>Cart</h2>
         {cartItems.map((item) => (
-          <li key={item.id} className="product-item">
+          <div key={item.id} className="Items">
             {item.product.productName} - R{item.product.productPrice} - {item.quantity}
-          </li>
+          </div>
         ))}
-      </ul>
-
-      <p>Total Price: R {totalPrice()}</p>
+        <p>Total Price: R {totalPrice()}</p>
       </div>
 
+      
+      </div>
+      </div>
       <div className='confirm-button'>
           <button
-            onClick={handleConfirm}
+            onClick={paywithpaystack}
             disabled={
               cartItems.length === 0 ||
               name.trim() === ''||
@@ -130,6 +157,7 @@ export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
             }
           >Confirm</button>
           </div>
-    </div>
+    
+          </div>
   );
 };
