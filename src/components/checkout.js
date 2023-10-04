@@ -5,7 +5,7 @@ import PaystackPop from '@paystack/inline-js'
 
 
 export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
-  const [name, setName] = useState('');
+  const [firstname, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [street, setStreet] = useState('');
@@ -23,8 +23,10 @@ export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
     paystack.newTransaction({
       key:"pk_test_1614fb1b435881450bf82e4c90488b8143bed936",
       amount: calculatedAmount * 100,
-      email,
-      name,
+      email:email,
+      firstname:firstname,
+      phone:phone,
+
       onSuccess(transaction){
         let message = `Payment Complete! Reference ${transaction.reference}`
         alert(message);
@@ -44,7 +46,7 @@ export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
 
       const orderData = {
         address:{
-          name,
+          firstname,
           email,
           phone,
           street,
@@ -63,7 +65,7 @@ export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
     
 
     deleteAllCartItems();
-    setName('');
+    setFirstName('');
     setEmail('');
     setPhone('');
     setStreet('');
@@ -89,8 +91,8 @@ export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
      
 
         <div className="address-container">
-          <label htmlFor="name">Name</label>
-          <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+          <label htmlFor="first-name">Name</label>
+          <input type="text" id="first-name" value={firstname} onChange={(e) => setFirstName(e.target.value)} />
         </div>
 
 
@@ -102,7 +104,7 @@ export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
 
       <div className="address-container">
           <label htmlFor="phone">Phone</label>
-          <input type="text" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
+          <input type="number" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
         </div>
 
         <div className="address-container">
@@ -147,7 +149,7 @@ export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
             onClick={paywithpaystack}
             disabled={
               cartItems.length === 0 ||
-              name.trim() === ''||
+              firstname.trim() === ''||
               email.trim()===''||
               phone.trim()===''||
               street.trim() === '' ||
