@@ -4,6 +4,9 @@ import {  addDoc,collection } from 'firebase/firestore';
 
 
 export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [street, setStreet] = useState('');
   const [suburb, setSuburb] = useState('');
   const [province, setProvince] = useState('');
@@ -20,6 +23,9 @@ export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
 
       const orderData = {
         address:{
+          name,
+          email,
+          phone,
           street,
           suburb,
           province,
@@ -36,7 +42,9 @@ export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
       alert('Order saved with ID: ' + docRef.id);
 
     deleteAllCartItems();
-
+    setName('');
+    setEmail('');
+    setPhone('');
     setStreet('');
     setSuburb('');
     setProvince('');
@@ -49,12 +57,30 @@ export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
   }
 
   return (
-    <div className='confirm'>
+    <div className='bili'>
 
-      <h2>Checkout</h2>
+      
       
       {/* Address */}
       <div className='address'>
+      <h2>Billing Address</h2>
+      <div className="address-container">
+          <label htmlFor="name">Name</label>
+          <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+        </div>
+
+
+      <div className="address-container">
+          <label htmlFor="email">Email</label>
+          <input type="text" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </div>
+
+
+      <div className="address-container">
+          <label htmlFor="phone">Phone</label>
+          <input type="text" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
+        </div>
+
         <div className="address-container">
           <label htmlFor="street">Street</label>
           <input type="text" id="street" value={street} onChange={(e) => setStreet(e.target.value)} />
@@ -77,6 +103,7 @@ export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
       </div>
       
       {/* Product Items */}
+      <div>
       <ul className="product-list">
         {cartItems.map((item) => (
           <li key={item.id} className="product-item">
@@ -86,11 +113,16 @@ export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
       </ul>
 
       <p>Total Price: R {totalPrice()}</p>
+      </div>
+
       <div className='confirm-button'>
           <button
             onClick={handleConfirm}
             disabled={
               cartItems.length === 0 ||
+              name.trim() === ''||
+              email.trim()===''||
+              phone.trim()===''||
               street.trim() === '' ||
               suburb.trim() === '' ||
               province.trim() === '' ||

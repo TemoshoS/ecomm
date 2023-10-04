@@ -521,8 +521,16 @@
 
 /* Card */
 .cart{
-  height: auto;
+  height: 100vh;
   width: 100%;
+}
+
+.continue-button{
+  border: none;
+  background-color: rgb(118, 200, 238);
+  padding: 10px ;
+  color: #f7fbfc;
+
 }
 .cart-content{
   display:flex;
@@ -695,9 +703,10 @@
   
 }
 
-.confirm{
+/* aaa */
 
-}
+
+
 /* Footer */
 
 .footer-container{

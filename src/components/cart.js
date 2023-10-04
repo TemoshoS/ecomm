@@ -33,11 +33,19 @@ export const Cart = ({
     }
   };
 
+  const handleShopping=()=>{
+    navigate('/')
+  }
+
   return (
     <div className='cart'>
     <h2>My cart - {cartItems.length} items</h2>
     {cartItems.length === 0 ? (
-      <p>Your cart is empty.</p>
+      <div>
+      <p >Your cart is empty.</p>
+      <button onClick={handleShopping} className='continue-button'>Continue Shopping</button>
+
+      </div>
     ) : (
       <div className='cart-content'>
         <div className='products-list'>
