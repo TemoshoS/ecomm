@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { collection,getDocs,query,where,orderBy} from 'firebase/firestore';
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { db } from '../firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { Slide } from 'react-slideshow-image';
-import 'react-slideshow-image/dist/styles.css'
-
+import 'react-slideshow-image/dist/styles.css';
 
 export const ProductList = ({ addToCart }) => {
+  // State for product data, search, and selected category
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const navigate = useNavigate();
 
+  // Function to fetch products from Firestore
   const getProducts = async () => {
     try {
-
       const q = query(
         collection(db, 'products'),
-        orderBy('productName') 
+        orderBy('productName')
       );
-  
+
       const querySnapshot = await getDocs(q);
       const productData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -33,22 +33,23 @@ export const ProductList = ({ addToCart }) => {
     }
   };
 
+  // Fetch products when the component mounts
   useEffect(() => {
     getProducts();
   }, []);
 
+  // Function to navigate to a product's details page
   const gotoProduct = (productId) => {
     navigate(`/product/${productId}`);
   };
 
+  // Function to handle adding a product to the cart
   const handleAddToCart = (event, selectedProduct) => {
     event.stopPropagation();
     addToCart(selectedProduct, 1);
   };
 
-
-
-
+  // Style for the slideshow
   const divStyle = {
     display: 'flex',
     alignItems: 'center',
@@ -58,7 +59,9 @@ export const ProductList = ({ addToCart }) => {
     backgroundPosition: 'center center',
     height: '260px',
     width: '100%'
-  }
+  };
+
+  // Images for the slideshow
   const slideImages = [
     {
       url: 'https://cdn.pixabay.com/photo/2013/01/29/18/12/flat-tire-76563_1280.jpg',
@@ -74,13 +77,12 @@ export const ProductList = ({ addToCart }) => {
     },
   ];
 
-
   return (
     <div className='product-list-container'>
 
       <div className='filter-container'>
 
-        {/*filter by catergory */}
+        {/* Filter by category */}
         <div className="category-filter">
           <select
             value={selectedCategory}
@@ -88,15 +90,14 @@ export const ProductList = ({ addToCart }) => {
             className='select-category'
           >
             <option value="">Shop by Department</option>
-            <option value="body">Boby Parts</option>
+            <option value="body">Body Parts</option>
             <option value="engine">Engine</option>
             <option value="interior">Interior</option>
             <option value="wheel">Wheels</option>
-
           </select>
         </div>
 
-        {/* search function */}
+        {/* Search function */}
         <div className="search-container">
           <input
             onChange={(event) => setSearch(event.target.value)}
@@ -108,15 +109,12 @@ export const ProductList = ({ addToCart }) => {
         </div>
       </div>
 
-      
-
-
       <div>
-
+        {/* Slideshow */}
         <div className="slide-container">
           <Slide>
             {slideImages.map((slideImage, index) => (
-              <div key={index} >
+              <div key={index}>
                 <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage.url})` }}>
                   <span className='spanStyle'>{slideImage.caption}</span>
                 </div>
@@ -125,10 +123,8 @@ export const ProductList = ({ addToCart }) => {
           </Slide>
         </div>
 
-
+        {/* Product list */}
         <div className="product-list">
-
-
           <div className="products">
             {products
               .filter((item) => {

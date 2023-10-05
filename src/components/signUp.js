@@ -6,6 +6,7 @@ import { RxCross2} from 'react-icons/rx';
 import { BiSolidUserCircle } from 'react-icons/bi';
 
 export default function SignUp() {
+  // State variables to store user input
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -14,13 +15,16 @@ export default function SignUp() {
     const naviagate = useNavigate();
 
     const register=()=>{
+
+      // Create a user with email and password using Firebase Authentication
       createUserWithEmailAndPassword(auth, email, password).then((userCrendential)=>{
         
-        
+        // Update the user's display name and phone number
         updateProfile(userCrendential.user, {
           displayName: name,
           phoneNumber: phone,
         }).then(()=>{
+          // Redirect the user to the login page after successful registration
           naviagate('/login');
         }).catch((error)=>{
           alert('Error setting display name: ' + error.message);
@@ -28,16 +32,19 @@ export default function SignUp() {
         
 
       }).catch((error)=>{
+        // Handle registration errors (e.g., weak password or email already in use)
         alert('Please enter atleast 7 digits')
       })
     }
 
+    // Function to toggle password visibility
     const togglePasswordVisibility=()=>{
       setShowPassword(!showPassword);
     }
 
+     // Function to handle navigation back to the cart page
     const handleHome=()=>{
-      naviagate('/')
+      naviagate('/cart')
     }
   return (
     <div className='auth'>

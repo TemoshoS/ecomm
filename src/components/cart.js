@@ -14,6 +14,7 @@ export const Cart = ({
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
+  // Use useEffect to check if the user is authenticated
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
@@ -22,17 +23,22 @@ export const Cart = ({
         setUser(null);
       }
     });
+    
     return () => unsubscribe();
   }, []);
 
+  // Function to handle the checkout process
   const checkOut = async () => {
     if (user) {
+      // Redirect to the checkout page if the user is authenticated
       navigate('/checkout');
     } else {
+      // Redirect to the login page if the user is not authenticated
       navigate('/login');
     }
   };
 
+  // Function to handle navigation back to shopping product list
   const handleShopping=()=>{
     navigate('/')
   }

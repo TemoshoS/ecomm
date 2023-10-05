@@ -18,18 +18,23 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Face6SharpIcon from '@mui/icons-material/Face6Sharp';
 
+// Define the Header component
 export const Header = ({ cartItems, authUser, userSignOut }) => {
   const location = useLocation();
 
+  // Determine the current route
   const isRegisterRoute = location.pathname === '/register';
   const isLoginRoute = location.pathname === '/login';
 
+  // State for controlling the menu drawer
   const [openMenu, setOpenMenu] = useState(false);
+
+  // Menu options for the drawer
   const menuOptions = [
     {
-         text: 'Home',
-         icon: <HomeIcon/>,
-         to: '/'
+      text: 'Home',
+      icon: <HomeIcon />,
+      to: '/'
     },
     {
       text: 'Sign In',
@@ -38,90 +43,91 @@ export const Header = ({ cartItems, authUser, userSignOut }) => {
     },
     {
       text: `Cart `,
-      icon: <div className='cart-icon'>
-        <ShoppingCartIcon />
-        {cartItems.length > 0 && (
+      icon: (
+        <div className='cart-icon'>
+          <ShoppingCartIcon />
+          {cartItems.length > 0 && (
             <span className="cart-count">{cartItems.length}</span>
           )}
-      </div>,
+        </div>
+      ),
       to: '/cart'
     },
-
     {
       text: 'Logout',
       icon: <LogoutIcon />,
       to: '/logout'
     },
   ];
+
   return (
     <nav className='nav-bar'>
-
-    <div className='header'>
-      <h3>Spares</h3>
-      <a href='/'><img src={logo}  alt='No logo' className='nav-logo'/></a>
-    
-    </div>
+      <div className='header'>
+        <h3>Spares</h3>
+        <a href='/'><img src={logo} alt='No logo' className='nav-logo' /></a>
+      </div>
 
       <div className='navbar-links-container'>
-
         {authUser ? (
           <>
-           <label><a>{`Hi, ${authUser.displayName}`}</a></label> 
-             <select className='select' onChange={(event)=>{
-              if(event.target.value === 'logout'){
+            {/* Display user information and dropdown menu */}
+            <label><a>{`Hi, ${authUser.displayName}`}</a></label>
+            <select className='select' onChange={(event) => {
+              if (event.target.value === 'logout') {
                 userSignOut();
               }
             }}>
               <option></option>
               <option>Profile</option>
               <option value='logout'>Logout</option>
-            </select> 
-           
-           
+            </select>
           </>
         ) : (
-          <> {!isLoginRoute && (
-            <a href='/login'>
-              Sign In <FontAwesomeIcon icon={faUser} />
-            </a>
-          )}
+          <>
+            {!isLoginRoute && (
+              <a href='/login'>
+                Sign In <FontAwesomeIcon icon={faUser} />
+              </a>
+            )}
           </>
         )}
 
+        {/* Display shopping cart icon */}
         <a href='/cart' className="cart-icon">
-          <AiOutlineShoppingCart style={{fontSize:'30px', color:''}}/>
+          <AiOutlineShoppingCart style={{ fontSize: '30px', color: '' }} />
           {cartItems.length > 0 && <span className="cart-count">{cartItems.length}</span>}
         </a>
-
-        
       </div>
 
-    <div className='navbar-menu-container'>
-      <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
-    </div>
-    <Drawer open={openMenu} onClose={() => setOpenMenu(false)} anchor='right'>
-      <Box
-        sx={{ width: 250 }}
-        role='presentation'
-        onClick={() => setOpenMenu(false)}
-        onKeyDown={() => setOpenMenu(false)}
-      >
-        <List>
-          {menuOptions.map((item) => (
-            <ListItem key={item.text} disablePadding>
+      <div className='navbar-menu-container'>
+        {/* Open the menu drawer */}
+        <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
+      </div>
 
-             <a href={item.to} className='side-navigation'>
-              <ListItemButton>
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text} />
-                </ListItemButton>
-              </a>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-      </Box>
-    </Drawer>
-  </nav>
+      {/* Menu Drawer */}
+      <Drawer open={openMenu} onClose={() => setOpenMenu(false)} anchor='right'>
+        <Box
+          sx={{ width: 250 }}
+          role='presentation'
+          onClick={() => setOpenMenu(false)}
+          onKeyDown={() => setOpenMenu(false)}
+        >
+          <List>
+            {menuOptions.map((item) => (
+              <ListItem key={item.text} disablePadding>
+                {/* Menu item links */}
+                <a href={item.to} className='side-navigation'>
+                  <ListItemButton>
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.text} />
+                  </ListItemButton>
+                </a>
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+        </Box>
+      </Drawer>
+    </nav>
   );
 };

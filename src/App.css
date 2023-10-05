@@ -91,9 +91,9 @@
 
 /* Auth */
 .auth{
-  background:linear-gradient(217deg, rgba(238, 109, 109, 0.8), rgba(255,0,0,0) 70.71%),
-             linear-gradient(127deg, rgba(174, 231, 174, 0.8), rgba(0,255,0,0) 70.71%),
-             linear-gradient(336deg, rgba(60, 60, 238, 0.8), rgba(0,0,255,0) 70.71%);
+  background:linear-gradient(217deg, rgba(14, 12, 48, 0.8), rgba(255,0,0,0) 70.71%),
+             linear-gradient(127deg, rgba(242, 247, 242, 0.8), rgba(0,255,0,0) 70.71%),
+             linear-gradient(336deg, rgba(24, 29, 27, 0.8), rgba(0,0,255,0) 70.71%);
   width: 100%;
   
   position: absolute;
@@ -649,6 +649,7 @@
   color: rgb(41, 129, 41);
   font-weight: bold;
   font-size: 1rem;
+  
 }
 
 .checkout{
@@ -661,6 +662,7 @@
   margin-top: 20px;
   border-radius: 2px;
   font-size: 1rem;
+  cursor: pointer;
 }
 
 /* Address */
@@ -739,7 +741,9 @@
   font-weight: bold;
 }
 
-
+.confirm-button{
+  padding: 20px 60px;
+}
 
 /* Footer */
 

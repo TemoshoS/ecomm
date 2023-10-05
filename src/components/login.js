@@ -5,7 +5,7 @@ import { auth } from '../firebase';
 import { RiCloseLine } from 'react-icons/ri';
 import { BiSolidUserCircle } from 'react-icons/bi';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import Cookies from 'js-cookie'; 
+import Cookies from 'js-cookie';
 
 const Signin = () => {
     const [email, setEmail] = useState('');
@@ -28,14 +28,15 @@ const Signin = () => {
         setRememberMe(!rememberMe);
     };
 
+    // Function to handle the login process
     const login = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 console.log(userCredential);
-                navigate('/');
+                navigate('/checkout'); // Redirect to the checkout page upon successful login
             })
             .catch((error) => {
-                console.log(error.message);
+                console.log(error.message); // Log any errors that occur during login
             });
 
         // If "Remember Me" is checked, save the email as a cookie
@@ -46,12 +47,14 @@ const Signin = () => {
         }
     };
 
+    // Function to toggle password visibility
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
+    // Function to handle navigation back to the cart page
     const handleHome = () => {
-        navigate('/');
+        navigate('/cart');
     };
 
     return (
