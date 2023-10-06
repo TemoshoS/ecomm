@@ -13,6 +13,7 @@ export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
   const [suburb, setSuburb] = useState('');
   const [province, setProvince] = useState('');
   const [postcode, setPostcode] = useState('');
+  
 
 
   const paywithpaystack =(e)=>{
@@ -134,12 +135,14 @@ export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
       
       <div className='checkout-cart'>
         <h2>Cart</h2>
+        <hr />
         {cartItems.map((item) => (
           <div key={item.id} className="Items">
-            {item.product.productName} - R{item.product.productPrice} - {item.quantity}
+            {item.product.productName}  * {item.quantity}
           </div>
         ))}
-        <p>Total Price: R {totalPrice()}</p>
+        <hr />
+        <p>Total: R{totalPrice()}</p>
       </div>
 
       
@@ -147,6 +150,7 @@ export const Checkout = ({ cartItems, totalPrice, deleteAllCartItems }) => {
       </div>
       <div className='confirm-button'>
           <button
+            className='pay-button'
             onClick={paywithpaystack}
             disabled={
               cartItems.length === 0 ||
