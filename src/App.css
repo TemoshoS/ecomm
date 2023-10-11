@@ -116,8 +116,8 @@
 
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   background-color: white;
-  height: 40rem;
-  width: 350px;
+  height: 34em;
+  width: 300px;
   margin: 10vh auto;
   border-radius: 5px;
 
@@ -128,10 +128,10 @@
   width: 40px;
   height: 40px;
   font-size: 26px;
-  color: #ccc;
+  color: black;
   background-color: azure;
   margin-left: 90%;
-  margin-top: 3%;
+  margin-top: 2%;
   cursor: pointer;
   border-radius: 20px;
   display: flex;
@@ -148,8 +148,15 @@
 .heading {
   margin-top: 100px;
   font-size: 3.4rem;
+  color:  #ccc;
 }
 
+.access-heading{
+  
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
 
 
 .input-container {
@@ -165,13 +172,13 @@
   width: 70%;
   margin-top: 10px;
   margin-bottom: 10px;
-  height: 3vh;
+  height: 4vh;
   padding: 0px 10px;
   outline: none;
   background-color: rgba(255, 255, 255, 0.7);
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   color: #ccc;
-  font-size: 18px;
+  font-size: 15px;
 
 }
 
@@ -187,8 +194,7 @@
   font-size: 12px;
   position: absolute;
   z-index: 1;
-  left: 5em;
-  padding: -8px 10px;
+  left: 3em;
   color: #ccc;
 }
 
@@ -201,9 +207,16 @@
 .password-toggle-icon {
   position: absolute;
   top: 50%;
-  left: 280px;
+  left: 250px;
   transform: translateY(-50%);
   cursor: pointer;
+  color: #ccc;
+}
+
+.weak-password {
+  color: red;
+  font-weight: bold;
+  font-size: 10px;
 }
 
 
@@ -217,8 +230,8 @@
 
 .submit-button {
   margin-top: 50px;
-  background-color: white;
-  color: #ccc;
+  background-color: #ccc;
+  color: white;
   border: 1px solid #ccc;
   padding: 7px;
   width: 40%;
@@ -227,8 +240,8 @@
 }
 
 .submit-button:hover {
-  background-color: #ccc;
-  color: white;
+  background-color: white;
+  color: #ccc;
 }
 
 .login-link {
