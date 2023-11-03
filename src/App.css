@@ -822,16 +822,42 @@
 
 /* Footer */
 
-.footer-container {
-  width: 100%;
-  background-color: #ccc;
-  padding: 100px 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+ /* Footer.css */
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
   text-align: center;
+}
 
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+}
 
+.footer-section {
+  width: 40%;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 24px;
+}
+
+a:hover {
+  color: #00bfff; /* Change the color on hover */
 }
 
 /* media screen */
@@ -896,6 +922,9 @@
   /* Product view details */
 
   /* Card */
+
+
+  /*  */
 
 
 .cart-product p {
