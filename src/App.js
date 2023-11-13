@@ -8,8 +8,7 @@ import ProductDetails from './components/productDetails';
 import { ProductList } from './components/productList';
 import { Cart } from './components/cart';
 import { Checkout } from './components/checkout';
-import SignUp from './components/signUp';
-import Signin from './components/login';
+
 import ForgotPassword from './components/forgotPassword';
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth } from './firebase'
@@ -228,8 +227,8 @@ function App() {
           path='/checkout'
           element={<Checkout cartItems={cartItems} totalPrice={totalPrice} deleteAllCartItems={deleteAllCartItems} />}
         />
-        <Route path='/register' element={<SignUp />} />
-        <Route path='/login' element={<Signin />} />
+        {/* <Route path='/register' element={<SignUp />} />
+        <Route path='/login' element={<LoginModal />} /> */}
         <Route path='/forgotpassword' element={<ForgotPassword />} />
       </Routes>
 
